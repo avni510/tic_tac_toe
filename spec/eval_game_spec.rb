@@ -18,6 +18,5 @@ describe EvalGame do
     it "can evaluate if a game is won" do 
       expect(game.won?(board)).to eq(bool)
     end
-
   end
 end

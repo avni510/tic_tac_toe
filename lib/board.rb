@@ -6,8 +6,11 @@ class Board
   end
 
   def fill(position, symbol)
-    @board[position.to_i] = symbol if position_conditions?(position)
-		return false if position_conditions?(position) == false
+		if position_conditions?(position)
+			@board[position.to_i] = symbol			
+    else
+			return false
+    end
     @board
   end
 

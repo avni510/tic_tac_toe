@@ -18,12 +18,12 @@ describe Board do
   end
 
   it "checks if the position is a valid board position" do 
-    expect(board.fill("10", "O")).to eq(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+    expect(board.fill("10", "O")).to eq(false)
   end
 
   it "checks if a position is open" do 
     board.fill("4", "X")
-    expect(board.fill('4', "O")).to eq(["0", "1", "2", "3", "X", "5", "6", "7", "8"])
+    expect(board.fill('4', "O")).to eq(false)
   end
 
 end

@@ -1,11 +1,10 @@
-class UserMessages
+class ConsoleInterface
   attr_reader :player1_symbol
   attr_reader :player2_symbol
 
 
   def initialize(wrapper)
     @wrapper = wrapper
-		@board = Board.new.board
   end
 
   def select_symbol
@@ -15,25 +14,33 @@ class UserMessages
       @player1_symbol.upcase!
     end while (valid_symbol?(@player1_symbol))
     player2_symbol_assignment
-    @wrapper.puts_string("Player 1's symbol is #{player1_symbol} and Player 2's symbol is #{player2_symbol}")
   end
 
+	def puts_symbols
+	 @wrapper.puts_string("Player 1's symbol is #{@player1_symbol} and Player 2's symbol is #{@player2_symbol}")	
+	end
+	
   def display_board(board)
-    @wrapper.puts_string(
-      "#{board[0]} | #{board[1]} | #{board[2]} \n===+===+===\n 
-      #{board[3]} | #{board[4]} | #{board[5]} \n===+===+===\n 
-      #{board[6]} | #{board[7]} | #{board[8]} \n")
+    @wrapper.puts_string(" #{board[0]} | #{board[1]} | #{board[2]} \n===+===+===\n #{board[3]} | #{board[4]} | #{board[5]} \n===+===+===\n #{board[6]} | #{board[7]} | #{board[8]} \n")
   end
 
-  def player_move(player_symbol)
+  def player_move
     @wrapper.puts_string("Please select your move by entering a number 0 to 8")
 		move = @wrapper.get_action    
-		board = board.fill(move, player_symbol)
-#		if board == false start the loop 	
   end
 
+  def move_messages(board)
+    display_board(board)
+    player_move
+  end
 
+	def game_over_message
+		@wrapper.puts_string("Game over")
+	end
 
+  def valid_move_message
+    @wrapper.puts_string("Please enter a valid move")
+  end
 private
 
   def player2_symbol_assignment
