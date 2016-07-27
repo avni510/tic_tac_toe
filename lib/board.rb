@@ -1,17 +1,17 @@
 class Board 
-  attr_reader :board
+  attr_reader :board_array
 
   def initialize 
-    @board = [*'0'..'8']
+    @board_array = [*'0'..'8']
   end
 
   def fill(position, symbol)
     if position_conditions?(position)
-      @board[position.to_i] = symbol      
+      @board_array[position.to_i] = symbol      
     else
       return false
     end
-    @board
+    @board_array
   end
 
   private 
@@ -25,7 +25,7 @@ class Board
   end
 
   def position_open?(position)
-    not board[position.to_i] !~ /^[0-8]{1}$/
+    not board_array[position.to_i] !~ /^[0-8]{1}$/
   end
 
 end

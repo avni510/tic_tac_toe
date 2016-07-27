@@ -40,22 +40,22 @@ private
   end
 
   def game_over?
-    @eval_game.tied?(@board.board) || @eval_game.won?(@board.board)
+    @eval_game.tied?(@board.board_array) || @eval_game.won?(@board.board_array)
   end
 
   def fill_board(symbol) 
-    move = @console_int.move_messages(@board.board)
+    move = @console_int.move_messages(@board.board_array)
     until @board.fill(move, symbol) do 
       @console_int.puts_space
       @console_int.valid_move_message
-      move = @console_int.move_messages(@board.board)
+      move = @console_int.move_messages(@board.board_array)
     end
     @board.fill(move, symbol)
   end
 
   def finished_game
     @console_int.puts_space
-    @console_int.display_board(@board.board)
+    @console_int.display_board(@board.board_array)
     @console_int.puts_space
     @console_int.game_over_message
   end
