@@ -1,62 +1,70 @@
-require_relative "board"
-require_relative "eval_game"
-require_relative "console_interface"
-require_relative "wrapperio"
+module TicTacToe
 
+  class Game
 
-class Game
-
-  def initialize
-    @board = Board.new
-    @eval_game = EvalGame.new
-    @console_int = ConsoleInterface.new(WrapperIO.new)
-  end
-
-  def run
-    symbol_selection   
-    game_loop 
-    finished_game
-  end
-
-private
-
-  def symbol_selection
-    @console_int.select_symbol
-    @console_int.puts_space
-    @console_int.puts_symbols     
-    @console_int.puts_space
-  end
-
-  def game_loop
-    until game_over?
-      @console_int.player_turn_message(1)
-      @console_int.puts_space 
-      fill_board(@console_int.player1_symbol)
-      @console_int.puts_space 
-      @console_int.player_turn_message(2)
-      @console_int.puts_space
-      fill_board(@console_int.player2_symbol) unless game_over? 
+    def initialize
+      @board = Board.new
+      @eval_game = EvalGame.new
+      @console_int = ConsoleInterface.new(WrapperIO.new)
+      @player_won = nil
     end
-  end
 
-  def game_over?
-    @eval_game.tied?(@board.nine_space_array) || @eval_game.won?(@board.nine_space_array)
-  end
+    def run
+      symbol_selection
+      game_loop  
+      finished_game
+    end
+    
+  private 
 
-  def fill_board(symbol) 
-    move = @console_int.move_messages(@board.nine_space_array)
-    until @board.fill(move, symbol) do 
+    def symbol_selection
+      @console_int.select_symbol
       @console_int.puts_space
-      @console_int.valid_move_message
+      @console_int.puts_symbols
+      @console_int.puts_space
+    end
+
+    def game_loop
+      until @eval_game.game_over?(@board.nine_space_array)
+        player_move(1, @console_int.player1_symbol) 
+        unless @eval_game.game_over?(@board.nine_space_array)
+          player_move(2, @console_int.player2_symbol) 
+        else
+          @player_won = 1
+        end
+      end
+     @player_won = 2 unless @player_won 
+    end
+    
+    def valid_move_loop(move, symbol)
+      until @board.fill(move, symbol)
+        @console_int.valid_move_message
+        move = @console_int.move_messages(@board.nine_space_array)
+      end
+      move
+    end
+
+
+    def player_move(num, symbol)
+      @console_int.player_turn_message(num)
       move = @console_int.move_messages(@board.nine_space_array)
+      move = valid_move_loop(move, symbol)
+      @board.fill(move, symbol)
     end
-    @board.fill(move, symbol)
-  end
 
-  def finished_game
-    @console_int.puts_space
-    @console_int.display_board(@board.nine_space_array)
-    @console_int.puts_space
-    @console_int.game_over_message
+    def tied_or_won_message
+     if @eval_game.tied?(@board.nine_space_array)
+       @console_int.tied_message
+      else
+        @console_int.won_message(@player_won)
+       @console_int.puts_space
+      end
+    end
+      
+    def finished_game
+     @console_int.display_board(@board.nine_space_array) 
+     @console_int.puts_space
+     tied_or_won_message
+    end
   end
 end
