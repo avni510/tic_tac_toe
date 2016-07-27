@@ -16,31 +16,41 @@ class ConsoleInterface
     player2_symbol_assignment
   end
 
-	def puts_symbols
-	 @wrapper.puts_string("Player 1's symbol is #{@player1_symbol} and Player 2's symbol is #{@player2_symbol}")	
-	end
-	
+  def puts_symbols
+    @wrapper.puts_string("Player 1's symbol is #{@player1_symbol} and Player 2's symbol is #{@player2_symbol}")  
+  end
+  
   def display_board(board)
     @wrapper.puts_string(" #{board[0]} | #{board[1]} | #{board[2]} \n===+===+===\n #{board[3]} | #{board[4]} | #{board[5]} \n===+===+===\n #{board[6]} | #{board[7]} | #{board[8]} \n")
   end
 
   def player_move
     @wrapper.puts_string("Please select your move by entering a number 0 to 8")
-		move = @wrapper.get_action    
+    move = @wrapper.get_action    
   end
 
   def move_messages(board)
     display_board(board)
+    puts_space
     player_move
   end
 
-	def game_over_message
-		@wrapper.puts_string("Game over")
-	end
+  def game_over_message
+    @wrapper.puts_string("Game over")
+  end
 
   def valid_move_message
     @wrapper.puts_string("Please enter a valid move")
   end
+  
+  def player_turn_message(player_num)
+    @wrapper.puts_string("It is Player #{player_num}'s turn")
+  end
+
+  def puts_space
+    @wrapper.puts_string("")
+  end
+  
 private
 
   def player2_symbol_assignment
