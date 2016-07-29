@@ -52,10 +52,10 @@ module TicTacToe
     end
 
     def tied_or_won_message
-      if @eval_game.tied?(@board.nine_space_array)
-        @console_int.tied_message
-      else
+      if @eval_game.won?(@board.nine_space_array)
         @console_int.won_message(@player_won)
+      else
+        @console_int.tied_message
         @console_int.puts_space
       end
     end
