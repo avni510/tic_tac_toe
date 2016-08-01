@@ -29,7 +29,7 @@ module TicTacToe
 
     def won_by_diagonals(board)
       [board[0], board[4], board[8]].uniq.length == 1 ||
-      [board[2], board[4], board[8]].uniq.length == 1
+      [board[2], board[4], board[6]].uniq.length == 1
     end
   end
 end
