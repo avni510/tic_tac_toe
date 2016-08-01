@@ -56,9 +56,9 @@ module TicTacToe
 
     describe ".player_move" do 
       it "prompts the user for their move on the board" do 
-          expect(mockio).to receive(:puts_string).exactly(1).times
-          expect(mockio).to receive(:get_action).and_return("1")
-          expect(console_int.player_move).to eq("1")
+        expect(mockio).to receive(:puts_string).exactly(1).times
+        expect(mockio).to receive(:get_action).and_return("1")
+        expect(console_int.player_move).to eq("1")
       end 
     end
 
@@ -78,7 +78,7 @@ module TicTacToe
       end
     end
 
-    describe ".player_turn_message" do 
+    describe ".puts_space" do 
       it "prints an empty string" do 
         expect(mockio).to receive(:puts_string).exactly(1).times
         console_int.puts_space
