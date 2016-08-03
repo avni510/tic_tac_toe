@@ -9,12 +9,14 @@ module TicTacToe
     end
 
     def select_symbol
-      begin 
-        @wrapper.puts_string("Player 1 please enter either 'X' or 'O' for your symbol")
-        @player1_symbol = @wrapper.get_action
-        @player1_symbol.upcase!
-      end while (valid_symbol?(@player1_symbol))
+      select_symbol_message
+      @player1_symbol = @wrapper.get_action
+      @player1_symbol.upcase!
       player2_symbol_assignment
+    end
+
+    def select_symbol_message
+      @wrapper.puts_string("Player 1 please enter either 'X' or 'O' for your symbol")
     end
 
     def puts_symbols
@@ -69,10 +71,5 @@ module TicTacToe
         @player2_symbol = "X"
       end     
     end
-
-    def valid_symbol?(symbol)
-      symbol !~ /^(X|O)$/
-    end
-
   end
 end
