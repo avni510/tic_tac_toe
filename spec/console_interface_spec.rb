@@ -6,27 +6,32 @@ module TicTacToe
     let(:console_int) { ConsoleInterface.new(mockio) }
 
     describe ".select_symbol" do 
-        it "prompts the user to select their symbol" do 
-          expect(mockio).to receive(:puts_string).exactly(1).times
-          expect(mockio).to receive(:get_action).and_return("X")
-          console_int.select_symbol
-        end
-
-
-      context "player 1 selects and 'X' " do 
-        it "returns the correct symbol for player 2 " do 
-          expect(mockio).to receive(:puts_string).exactly(1).times
-          expect(mockio).to receive(:get_action).and_return("X")
-          console_int.select_symbol
-          expect(console_int.player2_symbol).to eq("O")
-        end
+      it "prompts the user to select their symbol" do 
+        expect(mockio).to receive(:get_action).and_return("X")
+        console_int.select_symbol
       end
     end
 
+    describe ".select_symbol_message" do 
+      it "prints a choice of symbols for the user" do 
+        expect(mockio).to receive(:puts_string).exactly(1).times
+        console_int.select_symbol_message
+      end
+    end
+
+    describe ".valid_symbol_message" do 
+      context "the user does not enter either an X or an O" do 
+        it "prints a message to enter a valid symbol" do 
+          expect(mockio).to receive(:puts_string).exactly(1).times
+          console_int.valid_symbol_message
+        end
+      end
+    end
+    
     describe ".puts_symbols" do 
       it "can display each player's symbols" do 
         expect(mockio).to receive(:puts_string).exactly(1).times
-        console_int.puts_symbols
+        console_int.puts_symbols("X", "O")
       end
     end
     

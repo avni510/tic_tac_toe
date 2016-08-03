@@ -1,26 +1,25 @@
 module TicTacToe
   class ConsoleInterface
-    attr_reader :player1_symbol
-    attr_reader :player2_symbol
-
 
     def initialize(wrapper)
       @wrapper = wrapper
     end
 
     def select_symbol
-      select_symbol_message
-      @player1_symbol = @wrapper.get_action
-      @player1_symbol.upcase!
-      player2_symbol_assignment
+      symbol = @wrapper.get_action
+      symbol
     end
 
     def select_symbol_message
       @wrapper.puts_string("Player 1 please enter either 'X' or 'O' for your symbol")
     end
 
-    def puts_symbols
-      @wrapper.puts_string("Player 1's symbol is #{@player1_symbol} and Player 2's symbol is #{@player2_symbol}")  
+    def valid_symbol_message
+      @wrapper.puts_string("Please enter a valid symbol")
+    end
+
+    def puts_symbols(symbol1, symbol2)
+      @wrapper.puts_string("Player 1's symbol is #{symbol1} and Player 2's symbol is #{symbol2}")  
     end
     
     def display_board(board)
@@ -62,14 +61,6 @@ module TicTacToe
       @wrapper.puts_string("The game ended in a tie")
     end
 
-  private
-
-    def player2_symbol_assignment
-      if @player1_symbol == "X"
-        @player2_symbol = "O"
-      else
-        @player2_symbol = "X"
-      end     
-    end
   end
 end
+
