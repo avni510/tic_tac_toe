@@ -52,9 +52,15 @@ module TicTacToe
 
     describe ".player_move" do 
       it "prompts the user for their move on the board" do 
-        expect(mockio).to receive(:puts_string).exactly(1).times
         expect(mockio).to receive(:get_action).and_return("1")
         expect(console_int.player_move).to eq("1")
+      end 
+    end
+
+    describe ".player_move_message" do 
+      it "prompts the user for their move on the board" do 
+        expect(mockio).to receive(:puts_string).exactly(1).times
+        console_int.player_move_message
       end 
     end
 

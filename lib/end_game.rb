@@ -10,7 +10,7 @@ module TicTacToe
       if player_won_or_tied == "1" || player_won_or_tied == "2"
         @interface.won_message(player_won_or_tied)
       elsif player_won_or_tied == "tied"
-        @interface.tied_message(player_won_or_tied)
+        @interface.tied_message
       end
       @interface.puts_space
     end

@@ -27,14 +27,21 @@ module TicTacToe
     end
 
     def player_move
-      @wrapper.puts_string("Please select your move by entering a number 0 to 8")
       move = @wrapper.get_action    
+      move
+    end
+
+    def player_move_message
+      @wrapper.puts_string("Please select your move by entering a number 0 to 8")
     end
 
     def move_messages(board)
       display_board(board)
       puts_space
-      player_move
+      player_move_message
+      move = player_move
+      puts_space
+      move
     end
 
     def game_over_message

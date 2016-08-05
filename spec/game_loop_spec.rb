@@ -44,6 +44,7 @@ module TicTacToe
           expect(mock_validation).to receive(:board_conditions?).with(board0, "0").and_return(false)
           expect(mock_interface).to receive(:valid_move_message).exactly(1).times
           expect(mock_interface).to receive(:player_move).and_return("3")
+          expect(mock_interface).to receive(:puts_space)
 
           expect(mock_validation).to receive(:board_conditions?).with(board0, "3").and_return(true)
 

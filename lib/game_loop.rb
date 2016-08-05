@@ -36,6 +36,7 @@ module TicTacToe
       until @validation.board_conditions?(@board.nine_space_array, move) do 
         @interface.valid_move_message
         move = @interface.player_move
+        @interface.puts_space
       end
       move
     end

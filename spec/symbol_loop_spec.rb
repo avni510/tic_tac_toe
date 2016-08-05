@@ -11,6 +11,7 @@ module TicTacToe
     describe ".symbol_selection" do 
       context "the user selects a valid symbol" do 
         it "allows the user to select their symbols" do 
+          expect(mock_interface).to receive(:select_symbol_message).exactly(1).times
           expect(mock_interface).to receive(:select_symbol).and_return("X")
           expect(mock_interface).to receive(:puts_space).exactly(2).times
           expect(mock_validation).to receive(:symbol_conditions?).with("X").and_return(true)
@@ -25,6 +26,7 @@ module TicTacToe
 
       context "the user does not select a valid symbol" do 
         it "displays a message to enter a valid symbol and allows them to enter another symbol" do 
+          expect(mock_interface).to receive(:select_symbol_message).exactly(1).times
           expect(mock_interface).to receive(:select_symbol).and_return("y")
           expect(mock_interface).to receive(:puts_space).exactly(3).times
 

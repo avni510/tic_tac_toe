@@ -8,7 +8,12 @@ module TicTacToe
       @interface = interface
     end
 
+    def hello_world
+      puts "hello_world"
+    end
+
     def symbol_selection
+      @interface.select_symbol_message
       @player1_symbol = @interface.select_symbol
       symbol_selection_loop
       @player1_symbol.upcase!
