@@ -44,10 +44,6 @@ module TicTacToe
       move
     end
 
-    def game_over_message
-      @wrapper.puts_string("Game over")
-    end
-
     def valid_move_message
       @wrapper.puts_string("Please enter a valid move")
     end

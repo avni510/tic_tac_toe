@@ -2,10 +2,6 @@ module TicTacToe
 
   class EvalGame
 
-    def game_over?(board)
-      tied?(board) || won?(board)
-    end
-
     def tied?(board)
       board.all?{ |space| space == "X" || space == "O"}
     end

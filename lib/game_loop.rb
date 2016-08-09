@@ -8,35 +8,23 @@ module TicTacToe
       @validation = validation
     end
 
-    def instructions(tied_or_player_won, p1_symbol, p2_symbol)
-      tied_or_player_won = player_instructions(1, p1_symbol)
-      if tied_or_player_won
-        @interface.display_board(@board.nine_space_array)
-        return tied_or_player_won 
-      end
-      tied_or_player_won = player_instructions(2, p2_symbol)
-      if tied_or_player_won
-        @interface.display_board(@board.nine_space_array)
-        return tied_or_player_won 
-      end
-    end
-
-    private 
-
-    def player_instructions(player, symbol)
+    def instructions(player, symbol)
       move = @interface.move_messages(@board.nine_space_array)
       move = valid_move_loop(move)
-      board = @board.fill(move, symbol)
-      return tied_or_player_won = player.to_s if @eval_game.won?(@board.nine_space_array)
-      return tied_or_player_won = "tied" if @eval_game.tied?(@board.nine_space_array) 
-      player_won = nil
+      @board.fill(move, symbol)
+      if @eval_game.won?(@board.nine_space_array)
+        player
+      elsif @eval_game.tied?(@board.nine_space_array)
+        "tied"
+      end
     end
+    
+    private
 
     def valid_move_loop(move)
-      until @validation.board_conditions?(@board.nine_space_array, move) do 
+      until @validation.board_conditions?(@board.nine_space_array, move)
         @interface.valid_move_message
         move = @interface.player_move
-        @interface.puts_space
       end
       move
     end

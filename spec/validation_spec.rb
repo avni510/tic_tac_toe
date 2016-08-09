@@ -7,7 +7,11 @@ module TicTacToe
 
     describe ".board_conditions?" do 
 
-      board = ["O", "1", "2", "X", "4", "5", "6", "7", "8"]
+      board = [
+        "O", "1", "2", 
+        "X", "4", "5", 
+        "6", "7", "8"
+      ]
       it "can check if a valid board position was entered" do 
         [ ["5", true],
           ["10", false]
