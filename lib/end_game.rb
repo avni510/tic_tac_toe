@@ -1,18 +1,18 @@
 module TicTacToe
   class EndGame 
 
-    def initialize(interface) 
-      @interface = interface
+    def initialize(console_ui) 
+      @console_ui = console_ui
     end
 
     def finished_game(player_won_or_tied)
-      @interface.puts_space
+      @console_ui.puts_space
       if player_won_or_tied == "1" || player_won_or_tied == "2"
-        @interface.won_message(player_won_or_tied)
+        @console_ui.won_message(player_won_or_tied)
       elsif player_won_or_tied == "tied"
-        @interface.tied_message
+        @console_ui.tied_message
       end
-      @interface.puts_space
+      @console_ui.puts_space
     end
   end
 end
