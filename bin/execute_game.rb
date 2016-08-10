@@ -1,10 +1,22 @@
 #!/usr/bin/env ruby
 require_relative "../lib/tic_tac_toe"
 
-game = TicTacToe::Game.new(
-TicTacToe::GameLoop.new(TicTacToe::Board.new, TicTacToe::ConsoleInterface.new(TicTacToe::WrapperIO.new), TicTacToe::EvalGame.new, TicTacToe::Validation.new),
-TicTacToe::SymbolLoop.new(TicTacToe::Validation.new, TicTacToe::ConsoleInterface.new(TicTacToe::WrapperIO.new)),
+board = TicTacToe::Board.new 
 
-TicTacToe::EndGame.new(TicTacToe::ConsoleInterface.new(TicTacToe::WrapperIO.new)))
+wrapper = TicTacToe::WrapperIO.new
+
+consoleui = TicTacToe::ConsoleInterface.new(wrapper)
+
+eval_game = TicTacToe::EvalGame.new
+
+validation = TicTacToe::Validation.new
+
+game_loop = TicTacToe::GameLoop.new(board, consoleui , eval_game, validation)
+
+symbol_loop = TicTacToe::SymbolLoop.new(validation, consoleui)
+ 
+end_game = TicTacToe::EndGame.new(consoleui)
+
+game = TicTacToe::Game.new(game_loop, symbol_loop, end_game)
 
 game.run
