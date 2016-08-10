@@ -13,9 +13,9 @@ module TicTacToe
       move = valid_move_loop(move)
       @board.fill(move, symbol)
       if @eval_game.won?(@board.nine_space_array)
-        player
+        return player
       elsif @eval_game.tied?(@board.nine_space_array)
-        "tied"
+        return "tied"
       end
     end
     

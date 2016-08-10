@@ -1,6 +1,8 @@
 module TicTacToe
   require "game_loop"
-
+  require "board"
+  require "validation"
+  require "eval_game"
 
   describe GameLoop do 
     
@@ -182,6 +184,23 @@ module TicTacToe
           game_loop = GameLoop.new(board, interface, eval_game, validation)
 
           game_loop.instructions("2", "O")
+        end
+      end
+
+      context 'the game is neither won or tied' do 
+        it 'returns nil' do 
+          board = create_board([
+             "X", "1", "2", 
+             "3", "4", "5", 
+             "6", "7", "O"
+            ])
+          
+            allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("7")
+
+            game_loop = GameLoop.new(board, interface, eval_game, validation)
+
+            result = game_loop.instructions("1", "X")
+            expect(result).to eq(nil)
         end
       end
     end

@@ -1,26 +1,21 @@
 module TicTacToe
-  require "game"
+
+require "game"
+require "wrapperio"
 
   describe Game do 
+    let(:game_loop) {
+      GameLoop.new(
+        Board.new, ConsoleInterface.new(WrapperIO.new), EvalGame.new, Validation.new
+    )}
 
-    let(:mock_game_loop) { double () }
-    let(:mock_symbol_loop) { double () } 
-    let(:mock_end_game) { double () } 
-    let(:game) { Game.new(mock_game_loop, mock_symbol_loop, mock_end_game) }
+    context "player 1 wins the game" do 
+      it "runs through a game of tic tac toe" do 
+        game = Game.new(game_loop)
 
-    describe ".run" do 
-      it "can run through an entire tic tac toe game" do 
-        expect(mock_symbol_loop).to receive(:symbol_selection)
+        expect(game_loop).to receive(:instructions).with(1, "X").and_return(nil, 1)
 
-        expect(mock_symbol_loop).to receive(:player1_symbol).and_return("O")
-        expect(mock_symbol_loop).to receive(:player2_symbol).and_return("X")
-        expect(mock_game_loop).to receive(:instructions).with(nil, "O", "X").and_return(nil)
-
-        expect(mock_symbol_loop).to receive(:player1_symbol).and_return("O")
-        expect(mock_symbol_loop).to receive(:player2_symbol).and_return("X")
-        expect(mock_game_loop).to receive(:instructions).with(nil, "O", "X").and_return("2")
-
-        expect(mock_end_game).to receive(:finished_game).with("2")
+        expect(game_loop).to receive(:instructions).with(2, "O").and_return(nil) 
 
         game.run
       end
