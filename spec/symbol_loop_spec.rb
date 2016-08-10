@@ -1,47 +1,72 @@
 module TicTacToe
   require "symbol_loop"
-
-
-  describe SymbolLoop do 
-
-    let(:mock_validation) { double () } 
-    let(:mock_interface) { double () } 
-    let(:symbol_loop) { SymbolLoop.new(mock_validation, mock_interface) }
   
-    describe ".symbol_selection" do 
-      context "the user selects a valid symbol" do 
-        it "allows the user to select their symbols" do 
-          expect(mock_interface).to receive(:select_symbol_message).exactly(1).times
-          expect(mock_interface).to receive(:select_symbol).and_return("X")
-          expect(mock_interface).to receive(:puts_space).exactly(2).times
-          expect(mock_validation).to receive(:symbol_conditions?).with("X").and_return(true)
+  describe SymbolLoop do 
+    let(:interface) { double () } 
+    let(:validation) { Validation.new }
+    let(:symbol_loop) { symbol_loop = SymbolLoop.new(validation, interface) }
 
-          expect(mock_interface).to receive(:puts_symbols) 
+    before(:each) do 
+      allow(interface).to receive(:select_symbol_message)
+      allow(interface).to receive(:select_symbol)
+      allow(interface).to receive(:puts_symbols).with("X", "O")
+    end
 
-          symbol_loop.symbol_selection
-          expect(symbol_loop.player1_symbol).to eq("X")
-          expect(symbol_loop.player2_symbol).to eq("O")
-        end
+    it "returns the markers for both players" do 
+      allow(interface).to receive(:select_symbol).and_return("X")
+
+      result = symbol_loop.symbol_selection
+      expect(result).to eq(["X", "O"])
+    end  
+
+    it "prompts the user to select a symbol" do 
+      expect(interface).to receive(:select_symbol_message)
+      
+      expect(interface).to receive(:select_symbol).and_return("X")
+
+      symbol_loop.symbol_selection
+    end
+
+    context "Player 1 chooses 'O'" do 
+      it "returns 'X' for Player 2" do 
+        expect(interface).to receive(:select_symbol).and_return("O")
+
+        allow(interface).to receive(:puts_symbols).with("O", "X")
+
+        result = symbol_loop.symbol_selection
+        expect(result).to eq(["O", "X"])
       end
 
-      context "the user does not select a valid symbol" do 
-        it "displays a message to enter a valid symbol and allows them to enter another symbol" do 
-          expect(mock_interface).to receive(:select_symbol_message).exactly(1).times
-          expect(mock_interface).to receive(:select_symbol).and_return("y")
-          expect(mock_interface).to receive(:puts_space).exactly(3).times
+      it "displays the symbols of each player" do 
+        allow(interface).to receive(:select_symbol).and_return("O")
 
-          expect(mock_validation).to receive(:symbol_conditions?).with("y").and_return(false)
-          expect(mock_interface).to receive(:valid_symbol_message).exactly(1).times
-          expect(mock_interface).to receive(:select_symbol).and_return("o")
-          expect(mock_validation).to receive(:symbol_conditions?).with("o").and_return(true)
+        expect(interface).to receive(:puts_symbols).with("O", "X")
 
+        symbol_loop.symbol_selection
+      end
 
-          expect(mock_interface).to receive(:puts_symbols) 
-          symbol_loop.symbol_selection
-          expect(symbol_loop.player1_symbol).to eq("O")
-          expect(symbol_loop.player2_symbol).to eq("X")
-        end
-      end 
+      it "returns uppercase markers" do
+        allow(interface).to receive(:select_symbol).and_return("o")
+
+        allow(interface).to receive(:puts_symbols).with("O", "X")
+
+        result = symbol_loop.symbol_selection
+        expect(result).to eq(["O", "X"])
+      end
+    
+    end
+
+    context "the player enters an invalid symbol" do 
+      it "prompts to the user to enter another symbol" do 
+        expect(interface).to receive(:select_symbol).and_return('p', 'X')
+        
+        expect(validation).to receive(:symbol_conditions?).with('p').and_return(false)
+        
+        expect(interface).to receive(:valid_symbol_message)
+
+        expect(validation).to receive(:symbol_conditions?).with('X').and_return(true)
+        symbol_loop.symbol_selection
+      end
     end
   end
 end
