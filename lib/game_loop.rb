@@ -8,10 +8,10 @@ module TicTacToe
       @validation = validation
     end
 
-    def instructions(player, symbol)
+    def instructions(player, marker)
       move = @console_ui.move_messages(@board.nine_space_array)
       move = valid_move_loop(move)
-      @board.fill(move, symbol)
+      @board.fill(move, marker)
       if @eval_game.won?(@board.nine_space_array)
         return player
       elsif @eval_game.tied?(@board.nine_space_array)

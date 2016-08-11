@@ -6,8 +6,8 @@ module TicTacToe
       valid_position?(move) && position_open?(board, move)
     end
     
-    def symbol_conditions?(symbol)
-      not symbol !~ /^(X|O|x|o)$/
+    def marker_conditions?(marker)
+      not marker !~ /^(X|O|x|o)$/
     end 
   private 
 

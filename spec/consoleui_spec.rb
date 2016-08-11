@@ -5,34 +5,34 @@ module TicTacToe
     let(:mockio) { double() }
     let(:console_ui) { ConsoleUI.new(mockio) }
 
-    describe ".select_symbol" do 
+    describe ".select_marker" do 
       it "prompts the user to select their symbol" do 
         expect(mockio).to receive(:get_action).and_return("X")
-        console_ui.select_symbol
+        console_ui.select_marker
       end
     end
 
-    describe ".select_symbol_message" do 
+    describe ".select_marker_message" do 
       it "prints a choice of symbols for the user" do 
         expect(mockio).to receive(:puts_string).with("Player 1 please enter either 'X' or 'O' for your symbol").exactly(1).times
-        console_ui.select_symbol_message
+        console_ui.select_marker_message
       end
     end
 
-    describe ".valid_symbol_message" do 
+    describe ".valid_marker_message" do 
       context "the user does not enter either an X or an O" do 
         it "prints a message to enter a valid symbol" do 
           expect(mockio).to receive(:puts_string).with("Please enter a valid symbol").exactly(1).times
-          console_ui.valid_symbol_message
+          console_ui.valid_marker_message
         end
       end
     end
     
-    describe ".puts_symbols" do 
+    describe ".puts_markers" do 
       context "Player 1 selects a X as their symbol and Player 2 is O" do 
-        it "can display each player's symbols" do 
+        it "can display each player's markers" do 
           expect(mockio).to receive(:puts_string).with("Player 1's symbol is X and Player 2's symbol is O").exactly(1).times
-          console_ui.puts_symbols("X", "O")
+          console_ui.puts_markers("X", "O")
         end
       end
     end

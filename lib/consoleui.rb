@@ -5,21 +5,21 @@ module TicTacToe
       @wrapper = wrapper
     end
 
-    def select_symbol
-      symbol = @wrapper.get_action
-      symbol
+    def select_marker
+      marker = @wrapper.get_action
+      marker
     end
 
-    def select_symbol_message
+    def select_marker_message
       @wrapper.puts_string("Player 1 please enter either 'X' or 'O' for your symbol")
     end
 
-    def valid_symbol_message
+    def valid_marker_message
       @wrapper.puts_string("Please enter a valid symbol")
     end
 
-    def puts_symbols(symbol1, symbol2)
-      @wrapper.puts_string("Player 1's symbol is #{symbol1} and Player 2's symbol is #{symbol2}")  
+    def puts_markers(marker1, marker2)
+      @wrapper.puts_string("Player 1's symbol is #{marker1} and Player 2's symbol is #{marker2}")  
     end
     
     def display_board(board)

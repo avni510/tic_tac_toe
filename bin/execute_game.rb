@@ -13,7 +13,7 @@ validation = TicTacToe::Validation.new
 
 game_loop = TicTacToe::GameLoop.new(board, consoleui , eval_game, validation)
 
-symbol_loop = TicTacToe::SymbolLoop.new(validation, consoleui)
+symbol_loop = TicTacToe::MarkerLoop.new(validation, consoleui)
  
 end_game = TicTacToe::EndGame.new(consoleui)
 

@@ -18,14 +18,14 @@ module TicTacToe
       [
         ["2", "X"], 
         ["2", "O"]
-      ].each do |position, symbol|
+      ].each do |position, marker|
         it "returns a board with a filled in space" do 
           grid = [
-            "0", "1", "#{symbol}", 
+            "0", "1", "#{marker}", 
             "3", "4", "5", 
             "6", "7", "8"
           ]  
-          expect(board.fill(position, symbol)).to eq(grid)
+          expect(board.fill(position, marker)).to eq(grid)
         end
       end
 
