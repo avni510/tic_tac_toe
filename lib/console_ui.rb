@@ -35,7 +35,13 @@ module TicTacToe
       @wrapper.puts_string("Please select your move by entering a number 0 to 8")
     end
 
-    def move_messages(board)
+    def player_turn_message(player, marker)
+      @wrapper.puts_string("It is Player #{player}'s turn and your symbol is #{marker}")
+    end
+
+    def move_messages(board, player, marker)
+      player_turn_message(player, marker)
+      puts_space
       display_board(board)
       puts_space
       player_move_message
@@ -48,10 +54,6 @@ module TicTacToe
       @wrapper.puts_string("Please enter a valid move")
     end
     
-    def player_turn_message(player_num)
-      @wrapper.puts_string("It is Player #{player_num}'s turn")
-    end
-
     def puts_space
       @wrapper.puts_string("")
     end

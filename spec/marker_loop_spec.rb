@@ -1,5 +1,6 @@
 module TicTacToe
   require "marker_loop"
+  require "validation"
   
   describe MarkerLoop do 
     let(:mock_console_ui) { double () } 
@@ -10,6 +11,7 @@ module TicTacToe
       allow(mock_console_ui).to receive(:select_marker_message)
       allow(mock_console_ui).to receive(:select_marker)
       allow(mock_console_ui).to receive(:puts_markers).with("X", "O")
+      allow(mock_console_ui).to receive(:puts_space)
     end
 
     it "returns the markers for both players" do 

@@ -13,6 +13,7 @@ module TicTacToe
       p1_marker = p1_marker.upcase
       p2_marker = marker_assignment(p1_marker)
       @console_ui.puts_markers(p1_marker, p2_marker)
+      @console_ui.puts_space
       return p1_marker, p2_marker 
     end
 
