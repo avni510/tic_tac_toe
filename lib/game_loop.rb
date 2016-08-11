@@ -9,7 +9,7 @@ module TicTacToe
     end
 
     def instructions(player, marker)
-      move = @console_ui.move_messages(@board.nine_space_array)
+      move = @console_ui.move_messages(@board.nine_space_array, player, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
       if @eval_game.won?(@board.nine_space_array)
@@ -24,7 +24,7 @@ module TicTacToe
     def valid_move_loop(move)
       until @validation.board_conditions?(@board.nine_space_array, move)
         @console_ui.valid_move_message
-        move = @console_ui.player_move
+        move = @console_ui.user_input
       end
       move
     end

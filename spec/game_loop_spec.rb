@@ -14,189 +14,172 @@ module TicTacToe
       board
     end
 
-    def valid_move_loop(board, move)
-      expect(validation).to receive(:board_conditions?).with(board, move).and_return(true)
-      move
+    def valid_move_loop(game_loop, move)
+      expect(game_loop).to receive(:valid_move_loop).and_return(move)
     end
+    
     
     let(:eval_game) { EvalGame.new }
     let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
     describe ".instructions" do 
-      before(:each) do
-        allow(mock_console_ui).to receive(:move_messages)
+
+      context "player 1 is 'X' and it is player 1's turn " do 
+
+        player = 1 
+
+        p1_marker = 'X'
+
+        p1_winning_moves = ['6', '5'].each do | move| 
+
+          context "space #{move} is the winning move" do 
+            it "returns a '1' if player 1 wins" do
+
+              board = create_board([
+              "O", "O", "X",
+              "3", "X", "5",
+              "6", "O", "X"
+              ])
+
+              game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+
+              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p1_marker).and_return(move)
+              valid_move_loop(game_loop, move)
+
+              board.fill(move, p1_marker)
+
+              expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
+
+              result = game_loop.instructions(player, p1_marker)
+              expect(result).to eq(player)
+            end
+          end
+        end
+
+        it "returns 'tied' for a tie game" do
+          board = create_board([
+            "O", "1", "X", 
+            "X", "O", "O", 
+            "O", "X", "X"
+          ])
+          
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+          
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p1_marker).and_return('1')
+
+          valid_move_loop(game_loop, '1')
+         
+          board.fill('1', p1_marker)
+          
+          expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(false)
+
+          expect(eval_game).to receive(:tied?).with(board.nine_space_array).and_return(true)
+          
+          result = game_loop.instructions(player, "X")
+          expect(result).to eq("tied")
+        end
+
+        context 'the game is neither won or tied' do 
+          it 'returns nil' do 
+            board = create_board([
+               "X", "1", "2", 
+               "3", "4", "5", 
+               "6", "7", "O"
+              ])
+            
+              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p1_marker).and_return("7")
+
+              game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+
+              result = game_loop.instructions(player, p1_marker)
+              expect(result).to eq(nil)
+          end
+        end
       end
 
+      context "player 2 is 'O' and it is player 2's turn " do 
+        player = 2
 
-      context "space 2 is the winning move" do 
-        it "returns a '1' if player 1 wins" do
-          board = create_board([
-            "X", "X", "2",
-            "O", "4", "5",
-            "6", "7", "O"
+        p2_marker = 'O'
+
+        p2_winning_moves = ['3', '8'].each do |move|
+        
+          context "space #{move} is the winning move" do 
+            it "returns a '2' if player 2 wins" do
+              board = create_board([
+                "O", "X", "X",
+                "3", "O", "X",
+                "O", "X", "8"
+              ])
+
+              game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+
+              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p2_marker).and_return(move)
+              
+              valid_move_loop(game_loop, move)
+
+              board.fill(move, p2_marker)
+
+              expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
+
+              result = game_loop.instructions(player, p2_marker)
+              expect(result).to eq(player)
+            end
+          end
+        end
+
+        context 'an invalid position is entered' do 
+          it 'prompts the user to enter their move again' do 
+            board = create_board([
+              "X", "1", "2",
+              "O", "O", "5",
+              "6", "X", "X"
             ])
-          
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('2')
-          
-          valid_move_loop(board.nine_space_array, '2')
 
-          board.fill('2', "X")
+            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p2_marker).and_return("0")
 
-          expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
-          
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "0").and_return(false)
 
-          result = game_loop.instructions("1", "X")
-          expect(result).to eq("1")
-        end
-      end
+            expect(mock_console_ui).to receive(:valid_move_message)
 
-      context "space 6 is the winning move" do 
-        it "returns a '1' if player 1 wins" do
-          board = create_board([
-          "0", "1", "X",
-          "O", "X", "O",
-          "6", "7", "8"
-          ])
+            expect(mock_console_ui).to receive(:user_input).and_return('5')
 
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('6')
-          
-          valid_move_loop(board.nine_space_array, '6')
-          
-          board.fill('6', "X")
-
-          expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
-
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-          result = game_loop.instructions("1", "X")
-          expect(result).to eq("1")
-        end 
-      end
-
-      context "space 5 is the winnign move" do 
-        it "returns a '2' if player 2 wins" do
-          board = create_board([
-            "X", "1", "2",
-            "O", "O", "5",
-            "6", "X", "X"
-          ])
-
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("5")
-          
-          valid_move_loop(board.nine_space_array, '5')
-
-          board.fill('5', 'O')
-
-          expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-          result = game_loop.instructions("2", "O")
-          expect(result).to eq("2")
-        end
-      end
-
-      it "returns 'tied' for a tie game" do
-        board = create_board([
-          "O", "1", "X", 
-          "X", "O", "O", 
-          "O", "X", "X"
-        ])
-        
-        allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('1')
-
-        valid_move_loop(board.nine_space_array, '1')
-       
-        board.fill('1', "X")
-        
-        expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(false)
-
-        expect(eval_game).to receive(:tied?).with(board.nine_space_array).and_return(true)
-        
-        game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-
-        result = game_loop.instructions("2", "X")
-        expect(result).to eq("tied")
-      end
-
-      context "it is the player's turn with marker O" do 
-        it "fills the board with the user's move" do 
-          board = create_board([
-            "X", "1", "2",
-            "O", "O", "5",
-            "6", "X", "X"
-          ])
-
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("2")
-          
-          expect(board).to receive(:fill).with("2", "O")
-          
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-          game_loop.instructions("2", "O")
-        end
-      end
-
-      context "it is the player's turn with marker X" do 
-        it "fills the board with the user's move" do 
-          board = create_board([
-            "X", "1", "2",
-            "O", "O", "5",
-            "6", "X", "X"
-          ])
-
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("1")
-          
-          expect(board).to receive(:fill).with("1", "O")
-          
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-          game_loop.instructions("2", "O")
-        end
-      end
-
-      context 'the player enters an invalid position' do 
-        it 'prompts the user to enter their move again' do 
-          board = create_board([
-            "X", "1", "2",
-            "O", "O", "5",
-            "6", "X", "X"
-          ])
-
-          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("0")
-
-          expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "0").and_return(false)
-
-          expect(mock_console_ui).to receive(:valid_move_message)
-
-          expect(mock_console_ui).to receive(:player_move).and_return('5')
-
-          expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
-          
-          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
-
-          game_loop.instructions("2", "O")
-        end
-      end
-
-      context 'the game is neither won or tied' do 
-        it 'returns nil' do 
-          board = create_board([
-             "X", "1", "2", 
-             "3", "4", "5", 
-             "6", "7", "O"
-            ])
-          
-            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("7")
-
+            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
+            
             game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
-            result = game_loop.instructions("1", "X")
-            expect(result).to eq(nil)
+            game_loop.instructions(player, p2_marker)
+          end
         end
       end
+
+
+      context "player 2 is 'O' in the first game and is 'X' in the second game" do 
+
+        player = 2 
+        
+        p2_markers = ['O', 'X'].each do |marker|
+
+          it "fills the board with the user's move and marker" do 
+            board = create_board([
+              "X", "1", "2",
+              "O", "O", "5",
+              "6", "X", "X"
+            ])
+
+            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player,marker).and_return("1")
+            
+            expect(board).to receive(:fill).with("1", marker)
+            
+            game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
+
+            game_loop.instructions(player, marker)
+          end
+        end
+      end
+
+
     end
   end
 end
