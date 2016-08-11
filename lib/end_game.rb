@@ -7,7 +7,7 @@ module TicTacToe
 
     def finished_game(player_won_or_tied)
       @console_ui.puts_space
-      if player_won_or_tied == "1" || player_won_or_tied == "2"
+      if player_won_or_tied == 1 || player_won_or_tied == 2
         @console_ui.won_message(player_won_or_tied)
       elsif player_won_or_tied == "tied"
         @console_ui.tied_message

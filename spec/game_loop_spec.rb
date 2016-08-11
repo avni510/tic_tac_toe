@@ -143,7 +143,7 @@ module TicTacToe
 
             expect(mock_console_ui).to receive(:valid_move_message)
 
-            expect(mock_console_ui).to receive(:player_move).and_return('5')
+            expect(mock_console_ui).to receive(:user_input).and_return('5')
 
             expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
             

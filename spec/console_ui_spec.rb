@@ -5,10 +5,13 @@ module TicTacToe
     let(:mock_wrapper) { double() }
     let(:console_ui) { ConsoleUI.new(mock_wrapper) }
 
-    describe ".select_marker" do 
-      it "prompts the user to select their symbol" do 
-        expect(mock_wrapper).to receive(:get_action).and_return("X")
-        console_ui.select_marker
+    describe ".user_input" do 
+
+      user_input = ['X', '1'].each do |input|
+        it "prompts the user to enter into the console" do 
+          expect(mock_wrapper).to receive(:get_action).and_return(input)
+          console_ui.user_input
+        end
       end
     end
 
@@ -47,14 +50,6 @@ module TicTacToe
         ]
         console_ui.display_board(board)
       end
-    end
-
-
-    describe ".player_move" do 
-      it "prompts the user for their move on the board" do 
-        expect(mock_wrapper).to receive(:get_action).and_return("1")
-        expect(console_ui.player_move).to eq("1")
-      end 
     end
 
     describe ".player_move_message" do 
@@ -96,9 +91,9 @@ module TicTacToe
 
           expect(console_ui).to receive(:player_move_message)
 
-          expect(console_ui).to receive(:player_move).and_return("5")
+          expect(console_ui).to receive(:user_input).and_return("5")
 
-          console_ui.move_messages(board, player, marker)
+          expect(console_ui.move_messages(board, player, marker)).to eq('5')
         end
       end
     end    
