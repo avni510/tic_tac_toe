@@ -1,5 +1,5 @@
 module TicTacToe
-  class ConsoleInterface
+  class ConsoleUI
 
     def initialize(wrapper)
       @wrapper = wrapper

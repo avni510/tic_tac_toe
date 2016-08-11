@@ -5,7 +5,7 @@ board = TicTacToe::Board.new
 
 wrapper = TicTacToe::WrapperIO.new
 
-consoleui = TicTacToe::ConsoleInterface.new(wrapper)
+consoleui = TicTacToe::ConsoleUI.new(wrapper)
 
 eval_game = TicTacToe::EvalGame.new
 

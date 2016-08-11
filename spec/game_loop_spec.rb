@@ -21,17 +21,11 @@ module TicTacToe
     
     let(:eval_game) { EvalGame.new }
     let(:validation) { Validation.new }
-    let(:interface) { double }
+    let(:mock_console_ui) { double }
 
     describe ".instructions" do 
       before(:each) do
-#        allow(interface).to receive(:player_move)
-#        allow(interface).to receive(:display_board)
-#        allow(interface).to receive(:player_move_message)
-        allow(interface).to receive(:move_messages)
-#        allow(validation).to receive(:board_conditions?)
-#        allow(interface).to receive(:valid_move_message)
-#        allow(interface).to receive(:pllayer_move)
+        allow(mock_console_ui).to receive(:move_messages)
       end
 
 
@@ -43,7 +37,7 @@ module TicTacToe
             "6", "7", "O"
             ])
           
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return('2')
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('2')
           
           valid_move_loop(board.nine_space_array, '2')
 
@@ -51,7 +45,7 @@ module TicTacToe
 
           expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
           
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           result = game_loop.instructions("1", "X")
           expect(result).to eq("1")
@@ -66,7 +60,7 @@ module TicTacToe
           "6", "7", "8"
           ])
 
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return('6')
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('6')
           
           valid_move_loop(board.nine_space_array, '6')
           
@@ -74,7 +68,7 @@ module TicTacToe
 
           expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
 
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           result = game_loop.instructions("1", "X")
           expect(result).to eq("1")
@@ -89,14 +83,14 @@ module TicTacToe
             "6", "X", "X"
           ])
 
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("5")
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("5")
           
           valid_move_loop(board.nine_space_array, '5')
 
           board.fill('5', 'O')
 
           expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           result = game_loop.instructions("2", "O")
           expect(result).to eq("2")
@@ -110,7 +104,7 @@ module TicTacToe
           "O", "X", "X"
         ])
         
-        allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return('1')
+        allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return('1')
 
         valid_move_loop(board.nine_space_array, '1')
        
@@ -120,7 +114,7 @@ module TicTacToe
 
         expect(eval_game).to receive(:tied?).with(board.nine_space_array).and_return(true)
         
-        game_loop = GameLoop.new(board, interface, eval_game, validation)
+        game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
 
         result = game_loop.instructions("2", "X")
@@ -135,11 +129,11 @@ module TicTacToe
             "6", "X", "X"
           ])
 
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("2")
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("2")
           
           expect(board).to receive(:fill).with("2", "O")
           
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           game_loop.instructions("2", "O")
         end
@@ -153,11 +147,11 @@ module TicTacToe
             "6", "X", "X"
           ])
 
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("1")
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("1")
           
           expect(board).to receive(:fill).with("1", "O")
           
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           game_loop.instructions("2", "O")
         end
@@ -171,17 +165,17 @@ module TicTacToe
             "6", "X", "X"
           ])
 
-          allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("0")
+          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("0")
 
           expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "0").and_return(false)
 
-          expect(interface).to receive(:valid_move_message)
+          expect(mock_console_ui).to receive(:valid_move_message)
 
-          expect(interface).to receive(:player_move).and_return('5')
+          expect(mock_console_ui).to receive(:player_move).and_return('5')
 
           expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
           
-          game_loop = GameLoop.new(board, interface, eval_game, validation)
+          game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
           game_loop.instructions("2", "O")
         end
@@ -195,9 +189,9 @@ module TicTacToe
              "6", "7", "O"
             ])
           
-            allow(interface).to receive(:move_messages).with(board.nine_space_array).and_return("7")
+            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array).and_return("7")
 
-            game_loop = GameLoop.new(board, interface, eval_game, validation)
+            game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
             result = game_loop.instructions("1", "X")
             expect(result).to eq(nil)

@@ -2,18 +2,19 @@ module TicTacToe
 
 require "game"
 require "wrapperio"
+require "consoleui"
 
   describe Game do 
     let(:game_loop) {
       GameLoop.new(
-        Board.new, ConsoleInterface.new(WrapperIO.new), EvalGame.new, Validation.new
+        Board.new, ConsoleUI.new(WrapperIO.new), EvalGame.new, Validation.new
     )}
 
     let(:symbol_loop) {
-      SymbolLoop.new(Validation.new, ConsoleInterface.new(WrapperIO.new))
+      SymbolLoop.new(Validation.new, ConsoleUI.new(WrapperIO.new))
     }
 
-    let(:end_game) { EndGame.new(ConsoleInterface.new(WrapperIO))
+    let(:end_game) { EndGame.new(ConsoleUI.new(WrapperIO))
     }
 
     context "player 1 wins the game" do 
