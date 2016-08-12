@@ -23,7 +23,10 @@ module TicTacToe
     let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
-    describe ".instructions" do 
+    describe ".execution" do 
+      before(:each) do 
+        allow(mock_console_ui).to receive(:display_board)
+      end
 
       context "player 1 is 'X' and it is player 1's turn " do 
 
@@ -31,7 +34,7 @@ module TicTacToe
 
         p1_marker = 'X'
 
-        p1_winning_moves = ['6', '5'].each do | move| 
+        p1_winning_moves = ['6', '5'].each do |move| 
 
           context "space #{move} is the winning move" do 
             it "returns a '1' if player 1 wins" do
@@ -45,13 +48,14 @@ module TicTacToe
               game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
               allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p1_marker).and_return(move)
+
               valid_move_loop(game_loop, move)
 
               board.fill(move, p1_marker)
 
               expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
 
-              result = game_loop.instructions(player, p1_marker)
+              result = game_loop.execution(player, p1_marker)
               expect(result).to eq(player)
             end
           end
@@ -76,7 +80,7 @@ module TicTacToe
 
           expect(eval_game).to receive(:tied?).with(board.nine_space_array).and_return(true)
           
-          result = game_loop.instructions(player, "X")
+          result = game_loop.execution(player, p1_marker)
           expect(result).to eq("tied")
         end
 
@@ -92,7 +96,7 @@ module TicTacToe
 
               game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
-              result = game_loop.instructions(player, p1_marker)
+              result = game_loop.execution(player, p1_marker)
               expect(result).to eq(nil)
           end
         end
@@ -123,7 +127,7 @@ module TicTacToe
 
               expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
 
-              result = game_loop.instructions(player, p2_marker)
+              result = game_loop.execution(player, p2_marker)
               expect(result).to eq(player)
             end
           end
@@ -139,17 +143,30 @@ module TicTacToe
 
             allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player, p2_marker).and_return("0")
 
-            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "0").and_return(false)
+            # not sure which is a better way? 
+        
+            bool = validation.board_conditions?(board.nine_space_array, "0")
+            
+            until bool 
+              expect(mock_console_ui).to receive(:valid_move_message)
 
-            expect(mock_console_ui).to receive(:valid_move_message)
+              expect(mock_console_ui).to receive(:user_input).and_return('5')
 
-            expect(mock_console_ui).to receive(:user_input).and_return('5')
+              bool = validation.board_conditions?(board.nine_space_array, '5')
+            end
 
-            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
+              
+#            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "0").and_return(false)
+#
+#            expect(mock_console_ui).to receive(:valid_move_message)
+#
+#            expect(mock_console_ui).to receive(:user_input).and_return('5')
+#
+#            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, "5").and_return(true)
             
             game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
-            game_loop.instructions(player, p2_marker)
+            game_loop.execution(player, p2_marker)
           end
         end
       end
@@ -168,13 +185,18 @@ module TicTacToe
               "6", "X", "X"
             ])
 
-            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player,marker).and_return("1")
-            
-            expect(board).to receive(:fill).with("1", marker)
-            
+            move = '1'
+
             game_loop = GameLoop.new(board, mock_console_ui, eval_game, validation)
 
-            game_loop.instructions(player, marker)
+            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player,marker).and_return(move)
+            
+            valid_move_loop(game_loop, move)
+
+            expect(board).to receive(:fill).with(move, marker)
+
+            game_loop.execution(player, marker)
+
           end
         end
       end

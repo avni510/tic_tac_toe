@@ -16,8 +16,6 @@ module TicTacToe
 
     describe ".marker_selection" do 
       it "prompts the user to select a marker" do 
-        expect(mock_console_ui).to receive(:select_marker_message)
-        
         expect(mock_console_ui).to receive(:user_input).and_return("X")
 
         marker_loop.marker_selection
