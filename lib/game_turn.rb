@@ -1,5 +1,5 @@
 module TicTacToe
-  class GameLoop
+  class GameTurn
 
     def initialize(board, console_ui, eval_game, validation)
       @board = board 
@@ -8,16 +8,16 @@ module TicTacToe
       @validation = validation
     end
 
-    def execution(player, marker)
+    def execute(player, marker)
       move = @console_ui.move_messages(@board.nine_space_array, player, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
       if @eval_game.won?(@board.nine_space_array)
         @console_ui.display_board(@board.nine_space_array)
-        return player
+        player
       elsif @eval_game.tied?(@board.nine_space_array)
         @console_ui.display_board(@board.nine_space_array)
-        return "tied"
+        0
       end
     end
     

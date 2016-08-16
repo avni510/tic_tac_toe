@@ -21,7 +21,7 @@ module TicTacToe
       context "the game ended in a tie" do 
         it "displays a tied message" do 
           expect(mock_console_ui).to receive(:tied_message)
-          end_game.finished_game("tied")
+          end_game.finished_game(0)
         end
       end
     end

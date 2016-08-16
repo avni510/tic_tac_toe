@@ -28,9 +28,9 @@ module TicTacToe
 
     def marker_assignment(p1_marker, game_marker1, game_marker2)
       if p1_marker == game_marker1
-        return game_marker2
+        game_marker2
       elsif p1_marker == game_marker2
-        return game_marker1
+        game_marker1
       end
     end
   end

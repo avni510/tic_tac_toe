@@ -9,6 +9,7 @@ module TicTacToe
     def marker_conditions?(marker)
       not marker !~ /^(X|O|x|o)$/
     end 
+
   private 
 
     def valid_position?(move)
