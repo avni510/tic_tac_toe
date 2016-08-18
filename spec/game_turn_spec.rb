@@ -54,8 +54,6 @@ module TicTacToe
 
               board.fill(move, marker)
 
-#              expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(true)
-
               result = game_turn.execute(player_num, marker)
               expect(result).to eq(player_num)
             end
@@ -78,15 +76,9 @@ module TicTacToe
           
           game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
           
-#          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
-
           valid_move_loop(game_turn, move)
          
           board.fill(move, marker)
-          
-#          expect(eval_game).to receive(:won?).with(board.nine_space_array).and_return(false)
-
-#          expect(eval_game).to receive(:tied?).with(board.nine_space_array).and_return(true)
           
           result = game_turn.execute(player_num, marker)
           expect(result).to eq(0)
@@ -107,8 +99,6 @@ module TicTacToe
              "6", "7", "O"
             ])
           
-#          allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
-
           game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
 
           valid_move_loop(game_turn, move)
@@ -132,14 +122,9 @@ module TicTacToe
 
               game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
 
-#              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
-              
               valid_move_loop(game_turn, move)
 
-#              expect(board).to receive(:fill).with(move, marker)
-
               game_turn.execute(player_num, marker)
-
             end
           end
         end
@@ -157,10 +142,6 @@ module TicTacToe
               "6", "X", "X"
             ])
 
-#            allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(first_move)
-
-            # not sure which is a better way? 
-        
             bool = validation.board_conditions?(board.nine_space_array, first_move)
             
             until bool 
@@ -171,15 +152,6 @@ module TicTacToe
               bool = validation.board_conditions?(board.nine_space_array, second_move)
             end
 
-              
-  #            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, first_move).and_return(false)
-  #
-  #            expect(mock_console_ui).to receive(:valid_move_message)
-  #
-  #            expect(mock_console_ui).to receive(:user_input).and_return(second_move)
-  #
-  #            expect(validation).to receive(:board_conditions?).with(board.nine_space_array, second_move).and_return(true)
-            
             game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
 
             game_turn.execute(player_num, marker)
