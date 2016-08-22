@@ -18,6 +18,12 @@ module TicTacToe
     end
 
     def marker_selection_loop
+#      begin 
+#        marker = @console_ui.user_input
+#        @validation.marker_conditions?(marker) ? marker : @console_ui.valid_marker_message
+#      end while not @validation.marker_conditions?(marker)
+#      marker
+
       marker = @console_ui.user_input
       until @validation.marker_conditions?(marker)
         @console_ui.valid_marker_message
@@ -27,11 +33,7 @@ module TicTacToe
     end
 
     def marker_assignment(p1_marker, game_marker1, game_marker2)
-      if p1_marker == game_marker1
-        game_marker2
-      elsif p1_marker == game_marker2
-        game_marker1
-      end
+      p1_marker == game_marker1 ? game_marker2 : game_marker1
     end
   end
 end
