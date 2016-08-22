@@ -1,5 +1,5 @@
 module TicTacToe
-  require "console_ui"
+  require 'spec_helper'
 
   describe ConsoleUI do 
     let(:mock_wrapper) { double() }

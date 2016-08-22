@@ -1,5 +1,5 @@
 module TicTacToe
-  require "end_game"
+  require 'spec_helper'
 
   describe EndGame do 
     

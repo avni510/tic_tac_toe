@@ -1,7 +1,6 @@
 module TicTacToe
-  require "marker_loop"
-  require "validation"
-  
+  require 'spec_helper' 
+
   describe MarkerLoop do 
     let(:mock_console_ui) { double () } 
     let(:validation) { Validation.new }

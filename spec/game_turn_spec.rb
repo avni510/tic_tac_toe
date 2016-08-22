@@ -1,8 +1,5 @@
 module TicTacToe
-  require "game_turn"
-  require "board"
-  require "validation"
-  require "eval_game"
+  require 'spec_helper'
 
   describe GameTurn do 
     

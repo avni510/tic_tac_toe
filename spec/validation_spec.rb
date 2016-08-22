@@ -1,5 +1,5 @@
 module TicTacToe
-  require "validation"
+  require 'spec_helper'
 
   describe Validation do 
 

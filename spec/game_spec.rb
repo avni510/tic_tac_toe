@@ -1,14 +1,5 @@
 module TicTacToe
-
-  require "game"
-  require "wrapper_io"
-  require "console_ui"
-  require "game_turn"
-  require "board"
-  require "eval_game"
-  require "validation"
-  require "marker_loop"
-  require "end_game"
+  require 'spec_helper'
 
   describe Game do 
     let(:game_turn) {
