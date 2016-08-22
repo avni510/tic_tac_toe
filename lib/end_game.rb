@@ -5,11 +5,12 @@ module TicTacToe
       @console_ui = console_ui
     end
 
-    def finished_game(player_won_or_tied)
+    def finished_game(game_result, board_array)
+      @console_ui.display_board(board_array)
       @console_ui.puts_space
-      if player_won_or_tied == 1 || player_won_or_tied == 2
-        @console_ui.won_message(player_won_or_tied)
-      elsif player_won_or_tied == 0
+      if game_result == 1 || game_result == 2
+        @console_ui.won_message(game_result)
+      elsif game_result == 0
         @console_ui.tied_message
       end
       @console_ui.puts_space

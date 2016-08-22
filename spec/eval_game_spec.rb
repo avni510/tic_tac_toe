@@ -1,14 +1,60 @@
 module TicTacToe
-  require "eval_game"
+  require 'spec_helper'
 
   describe EvalGame do 
     let(:game){ EvalGame.new }
 
-    describe ".tied" do 
-      it "can evaluate if a game is tied" do 
+    describe ".player_won_or_tied" do
+      context "player 1 is 'X' and player 1 won the game" do
+        it "returns 1" do
+          board = [ 
+            "X", "O", "2", 
+            "3", "X", "O",
+            "6", "7", "X"
+          ]
+          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(1)
+        end
+      end
+
+      context "player 2 is 'O' and player 2 won the game" do
+        it 'returns 2' do
+          board = [
+            "X", "O", "2", 
+            "3", "O", "X", 
+            "6", "O", "X"
+          ]
+          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(2)
+        end
+      end
+
+      context "the game is tied" do
+        it 'returns 0' do
+          board = [
+            "X", "X", "O", 
+            "O", "O", "X", 
+            "X", "O", "X"
+          ]
+          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(0)
+        end
+      end
+    end
+
+    describe ".game_over" do
+      it 'can evaluate if the game is over' do
         board = [
           "X", "O", "X", 
           "O", "X", "O", 
+          "X", "O", "X"
+        ]
+        expect(game.game_over?(board)).to eq(true)
+      end
+    end
+
+    describe ".tied" do 
+      it "can evaluate if a game is tied" do 
+        board = [
+          "X", "X", "O", 
+          "O", "O", "X", 
           "X", "O", "X"
         ]
         expect(game.tied?(board)).to eq(true)

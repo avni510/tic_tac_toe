@@ -12,13 +12,7 @@ module TicTacToe
       move = @console_ui.move_messages(@board.nine_space_array, player, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
-      if @eval_game.won?(@board.nine_space_array)
-        @console_ui.display_board(@board.nine_space_array)
-        player
-      elsif @eval_game.tied?(@board.nine_space_array)
-        @console_ui.display_board(@board.nine_space_array)
-        0
-      end
+      @board.nine_space_array
     end
     
     private

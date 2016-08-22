@@ -14,18 +14,34 @@ module TicTacToe
     let(:end_game) { EndGame.new(ConsoleUI.new(WrapperIO))
     }
 
+    let(:eval_game) {EvalGame.new}
+
     describe ".run" do 
       context "player 1 wins the game and is symbol X" do 
         it "runs through a game of tic tac toe" do 
-          game = Game.new(game_turn, marker_loop, end_game)
+          game = Game.new(game_turn, marker_loop, end_game, eval_game)
           
           expect(marker_loop).to receive(:marker_selection).and_return(["X", "O"])
           
-          expect(game_turn).to receive(:execute).with(1, "X").and_return(nil, 1)
+          expect(game_turn).to receive(:execute).with(1, "X").and_return(
+            [ 
+              "X", "O", "X",
+              "3", "O", "X", 
+              "6", "7", "8",
+          ])
 
-          expect(game_turn).to receive(:execute).with(2, "O").and_return(nil) 
+          winning_board = 
+            [ 
+              "X", "O", "X",
+              "3", "O", "X", 
+              "6", "O", "8"
+          ]
 
-          expect(end_game).to receive(:finished_game).with(1)
+          expect(game_turn).to receive(:execute).with(2, "O").and_return(winning_board)
+
+          game_result = eval_game.player_won_or_tied(winning_board, 'X', 'O')
+
+          expect(end_game).to receive(:finished_game).with(game_result, winning_board)
 
           game.run
         end

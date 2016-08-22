@@ -35,7 +35,8 @@ module TicTacToe
         ].each do |player_num, marker|
 
           context "space #{move} is the winning move" do 
-            it "returns a '#{player_num}' if player #{player_num} wins" do
+            it "returns the winning board" do 
+#            it "returns a '#{player_num}' if player #{player_num} wins" do
 
               board = create_board([
               "O", "O", "2",
@@ -52,7 +53,7 @@ module TicTacToe
               board.fill(move, marker)
 
               result = game_turn.execute(player_num, marker)
-              expect(result).to eq(player_num)
+              expect(result).to eq(board.nine_space_array)
             end
           end
         end
@@ -64,7 +65,8 @@ module TicTacToe
         move = '1'
         marker = 'X'
 
-        it "returns '0' for a tie game" do
+        it 'returns the tied board' do         
+#        it "returns '0' for a tie game" do
           board = create_board([
             "O", "1", "X", 
             "X", "O", "O", 
@@ -78,7 +80,7 @@ module TicTacToe
           board.fill(move, marker)
           
           result = game_turn.execute(player_num, marker)
-          expect(result).to eq(0)
+          expect(result).to eq(board.nine_space_array)
         end
       end
 
@@ -87,7 +89,7 @@ module TicTacToe
         player_num = 1
         marker = 'X'
         
-        it 'returns nil if the game is neither won or tied' do 
+        it 'returns the board if the game is neither won or tied' do 
           move = '7'
           
           board = create_board([
@@ -101,7 +103,7 @@ module TicTacToe
           valid_move_loop(game_turn, move)
 
           result = game_turn.execute(player_num, marker)
-          expect(result).to eq(nil)
+          expect(result).to eq(board.nine_space_array)
         end
 
         context "player 1 is 'O' the first game and 'X' the second game" do
@@ -121,7 +123,8 @@ module TicTacToe
 
               valid_move_loop(game_turn, move)
 
-              game_turn.execute(player_num, marker)
+              result = game_turn.execute(player_num, marker)
+              expect(result).to eq(board.nine_space_array)
             end
           end
         end
