@@ -142,14 +142,12 @@ module TicTacToe
               "6", "X", "X"
             ])
 
-            bool = validation.board_conditions?(board.nine_space_array, first_move)
+            move = first_move 
             
-            until bool 
+            until validation.board_conditions?(board.nine_space_array, move)
               expect(mock_console_ui).to receive(:valid_move_message)
-
               expect(mock_console_ui).to receive(:user_input).and_return(second_move)
-
-              bool = validation.board_conditions?(board.nine_space_array, second_move)
+              move = second_move
             end
 
             game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
