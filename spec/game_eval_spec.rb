@@ -48,20 +48,16 @@ module TicTacToe
         ]
         expect(game_eval.game_over?(board)).to eq(true)
       end
-    end
 
-    describe ".tied" do 
       it "can evaluate if a game is tied" do 
         board = [
           "X", "X", "O", 
           "O", "O", "X", 
           "X", "O", "X"
         ]
-        expect(game_eval.tied?(board)).to eq(true)
+        expect(game_eval.game_over?(board)).to eq(true)
       end
-    end
 
-    describe ".won" do 
       [
         [[
           "X", "X", "X",
@@ -90,7 +86,7 @@ module TicTacToe
           ], true]
       ].each do |board, bool|
         it "can evaluate if a game is won" do 
-          expect(game_eval.won?(board)).to eq(bool)
+          expect(game_eval.game_over?(board)).to eq(bool)
         end
       end
     end

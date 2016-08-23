@@ -14,6 +14,8 @@ module TicTacToe
       tied?(board) || won?(board)
     end
     
+  private
+
     def tied?(board)
       board.all?{ |space| space == "X" || space == "O"}
     end
@@ -22,7 +24,6 @@ module TicTacToe
       won_by_rows(board) || won_by_columns(board) || won_by_diagonals(board)
     end
 
-  private
     
     def won_by_rows(board)
       [board[0], board[1], board[2]].uniq.length == 1 ||
