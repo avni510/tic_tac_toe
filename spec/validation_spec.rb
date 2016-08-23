@@ -5,7 +5,7 @@ module TicTacToe
 
     let (:validation) {Validation.new}
 
-    describe ".board_conditions?" do 
+    describe ".move_valid?" do 
 
       board = [
         "O", "1", "2", 
@@ -16,16 +16,16 @@ module TicTacToe
         [ ["5", true],
           ["10", false]
         ].each do |position, bool|
-          expect(validation.board_conditions?(board, position)).to eq(bool)
+          expect(validation.move_valid?(board, position)).to eq(bool)
         end
       end
     
       it "can check if the move entered is open" do 
-        expect(validation.board_conditions?(board, '0')).to eq(false)
+        expect(validation.move_valid?(board, '0')).to eq(false)
       end
     end
 
-    describe ".symbol_conditions?" do 
+    describe ".move_valid?" do 
       
       it "can check if a valid symbol was entered" do 
         [ ["p", false], 

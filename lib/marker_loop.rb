@@ -20,12 +20,12 @@ module TicTacToe
     def marker_selection_loop
 #      begin 
 #        marker = @console_ui.user_input
-#        @validation.marker_conditions?(marker) ? marker : @console_ui.valid_marker_message
-#      end while not @validation.marker_conditions?(marker)
+#        @validation.marker_valid?(marker) ? marker : @console_ui.valid_marker_message
+#      end while not @validation.marker_valid?(marker)
 #      marker
 
       marker = @console_ui.user_input
-      until @validation.marker_conditions?(marker)
+      until @validation.marker_valid?(marker)
         @console_ui.valid_marker_message
         marker = @console_ui.user_input
       end

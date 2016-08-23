@@ -18,7 +18,7 @@ module TicTacToe
     private
 
     def valid_move_loop(move)
-      until @validation.board_conditions?(@board.nine_space_array, move)
+      until @validation.move_valid?(@board.nine_space_array, move)
         @console_ui.valid_move_message
         move = @console_ui.user_input
       end
