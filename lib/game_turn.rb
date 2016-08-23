@@ -1,10 +1,9 @@
 module TicTacToe
   class GameTurn
 
-    def initialize(board, console_ui, eval_game, validation)
+    def initialize(board, console_ui, validation)
       @board = board 
       @console_ui = console_ui 
-      @eval_game = eval_game
       @validation = validation
     end
 

@@ -5,7 +5,7 @@ module TicTacToe
       @console_ui = console_ui
     end
 
-    def finished_game(game_result, board_array)
+    def game_over_messages(game_result, board_array)
       @console_ui.display_board(board_array)
       @console_ui.puts_space
       if game_result == 1 || game_result == 2

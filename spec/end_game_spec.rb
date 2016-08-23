@@ -11,7 +11,7 @@ module TicTacToe
       allow(mock_console_ui).to receive(:display_board)
     end 
 
-    describe ".finished_game" do 
+    describe ".game_over_messages" do 
       context "player 1 won" do 
         it "displays a won message" do 
           board_array = [
@@ -21,7 +21,7 @@ module TicTacToe
           ]
           expect(mock_console_ui).to receive(:won_message)
 
-          end_game.finished_game(1, board_array)
+          end_game.game_over_messages(1, board_array)
         end
       end
 
@@ -34,7 +34,7 @@ module TicTacToe
           ]
           expect(mock_console_ui).to receive(:tied_message)
 
-          end_game.finished_game(0, board_array)
+          end_game.game_over_messages(0, board_array)
         end
       end
     end

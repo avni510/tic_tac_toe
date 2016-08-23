@@ -15,7 +15,6 @@ module TicTacToe
       expect(game_turn).to receive(:valid_move_loop).and_return(move)
     end
     
-    let(:eval_game) { GameEval.new }
     let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
@@ -35,7 +34,6 @@ module TicTacToe
 
           context "space #{move} is the winning move" do 
             it "returns the winning board" do 
-#            it "returns a '#{player_num}' if player #{player_num} wins" do
 
               board = create_board([
               "O", "O", "2",
@@ -43,7 +41,7 @@ module TicTacToe
               "X", "O", "X"
               ])
 
-              game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
+              game_turn = GameTurn.new(board, mock_console_ui, validation)
 
               allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
 
@@ -65,14 +63,13 @@ module TicTacToe
         marker = 'X'
 
         it 'returns the tied board' do         
-#        it "returns '0' for a tie game" do
           board = create_board([
             "O", "1", "X", 
             "X", "O", "O", 
             "O", "X", "X"
           ])
           
-          game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
+          game_turn = GameTurn.new(board, mock_console_ui, validation)
           
           move_valid_loop(game_turn, move)
          
@@ -97,7 +94,7 @@ module TicTacToe
              "6", "7", "O"
             ])
           
-          game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
+          game_turn = GameTurn.new(board, mock_console_ui, validation)
 
           move_valid_loop(game_turn, move)
 
@@ -118,7 +115,7 @@ module TicTacToe
               ])
 
 
-              game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
+              game_turn = GameTurn.new(board, mock_console_ui, validation)
 
               move_valid_loop(game_turn, move)
 
@@ -149,7 +146,7 @@ module TicTacToe
               move = second_move
             end
 
-            game_turn = GameTurn.new(board, mock_console_ui, eval_game, validation)
+            game_turn = GameTurn.new(board, mock_console_ui, validation)
 
             game_turn.execute(player_num, marker)
           end

@@ -11,7 +11,7 @@ game_eval = TicTacToe::GameEval.new
 
 validation = TicTacToe::Validation.new
 
-game_turn = TicTacToe::GameTurn.new(board, consoleui , game_eval, validation)
+game_turn = TicTacToe::GameTurn.new(board, consoleui, validation)
 
 symbol_loop = TicTacToe::MarkerLoop.new(validation, consoleui)
  

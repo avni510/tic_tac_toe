@@ -4,7 +4,7 @@ module TicTacToe
   describe Game do 
     let(:game_turn) {
       GameTurn.new(
-        Board.new, ConsoleUI.new(WrapperIO.new), GameEval.new, Validation.new
+        Board.new, ConsoleUI.new(WrapperIO.new), Validation.new
     )}
 
     let(:marker_loop) {
@@ -14,12 +14,12 @@ module TicTacToe
     let(:end_game) { EndGame.new(ConsoleUI.new(WrapperIO))
     }
 
-    let(:eval_game) {GameEval.new}
+    let(:game_eval) {GameEval.new}
 
     describe ".run" do 
       context "player 1 wins the game and is symbol X" do 
         it "runs through a game of tic tac toe" do 
-          game = Game.new(game_turn, marker_loop, end_game, eval_game)
+          game = Game.new(game_turn, marker_loop, end_game, game_eval)
           
           expect(marker_loop).to receive(:marker_selection).and_return(["X", "O"])
           
@@ -39,9 +39,9 @@ module TicTacToe
 
           expect(game_turn).to receive(:execute).with(2, "O").and_return(winning_board)
 
-          game_result = eval_game.player_won_or_tied(winning_board, 'X', 'O')
+          game_result = game_eval.player_won_or_tied(winning_board, 'X', 'O')
 
-          expect(end_game).to receive(:finished_game).with(game_result, winning_board)
+          expect(end_game).to receive(:game_over_messages).with(game_result, winning_board)
 
           game.run
         end
