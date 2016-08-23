@@ -6,7 +6,7 @@ require_relative "wrapper_io"
 require_relative "validation"
 require_relative "marker_loop"
 require_relative "game_turn"
-require_relative "end_game"
+require_relative "game_completion"
 
 module TicTacToe
 end

@@ -1,5 +1,5 @@
 module TicTacToe
-  class EndGame 
+  class GameCompletion 
 
     def initialize(console_ui) 
       @console_ui = console_ui

@@ -1,10 +1,10 @@
 module TicTacToe
   require 'spec_helper'
 
-  describe EndGame do 
+  describe GameCompletion do 
     
     let(:mock_console_ui) { double () }
-    let(:end_game) { EndGame.new(mock_console_ui) }
+    let(:game_completion) { GameCompletion.new(mock_console_ui) }
 
     before (:each) do 
       expect(mock_console_ui).to receive(:puts_space).exactly(2).times
@@ -21,7 +21,7 @@ module TicTacToe
           ]
           expect(mock_console_ui).to receive(:won_message)
 
-          end_game.game_over_messages(1, board_array)
+          game_completion.game_over_messages(1, board_array)
         end
       end
 
@@ -34,7 +34,7 @@ module TicTacToe
           ]
           expect(mock_console_ui).to receive(:tied_message)
 
-          end_game.game_over_messages(0, board_array)
+          game_completion.game_over_messages(0, board_array)
         end
       end
     end

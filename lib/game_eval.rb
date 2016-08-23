@@ -3,11 +3,8 @@ module TicTacToe
   class GameEval
 
     def player_won_or_tied(board, marker1, marker2)
-      if won?(board)
-        board.count(marker1) > board.count(marker2) ? 1 : 2
-      elsif tied?(board)
-        0
-      end
+      return 0 if tied?(board)
+      board.count(marker1) > board.count(marker2) ? 1 : 2
     end
       
     def game_over?(board) 

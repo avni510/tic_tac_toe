@@ -1,6 +1,6 @@
   require "board"
   require "console_ui"
-  require "end_game"
+  require "game_completion"
   require "game_eval"
   require "game"
   require "game_turn"
