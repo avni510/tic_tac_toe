@@ -1,6 +1,6 @@
 module TicTacToe
 
-  class EvalGame
+  class GameEval
 
     def player_won_or_tied(board, marker1, marker2)
       if won?(board)

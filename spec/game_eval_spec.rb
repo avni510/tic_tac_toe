@@ -1,8 +1,8 @@
 module TicTacToe
   require 'spec_helper'
 
-  describe EvalGame do 
-    let(:game){ EvalGame.new }
+  describe GameEval do 
+    let(:game_eval){ GameEval.new }
 
     describe ".player_won_or_tied" do
       context "player 1 is 'X' and player 1 won the game" do
@@ -12,7 +12,7 @@ module TicTacToe
             "3", "X", "O",
             "6", "7", "X"
           ]
-          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(1)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(1)
         end
       end
 
@@ -23,7 +23,7 @@ module TicTacToe
             "3", "O", "X", 
             "6", "O", "X"
           ]
-          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(2)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(2)
         end
       end
 
@@ -34,7 +34,7 @@ module TicTacToe
             "O", "O", "X", 
             "X", "O", "X"
           ]
-          expect(game.player_won_or_tied(board, 'X', 'O')).to eq(0)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(0)
         end
       end
     end
@@ -46,7 +46,7 @@ module TicTacToe
           "O", "X", "O", 
           "X", "O", "X"
         ]
-        expect(game.game_over?(board)).to eq(true)
+        expect(game_eval.game_over?(board)).to eq(true)
       end
     end
 
@@ -57,7 +57,7 @@ module TicTacToe
           "O", "O", "X", 
           "X", "O", "X"
         ]
-        expect(game.tied?(board)).to eq(true)
+        expect(game_eval.tied?(board)).to eq(true)
       end
     end
 
@@ -90,7 +90,7 @@ module TicTacToe
           ], true]
       ].each do |board, bool|
         it "can evaluate if a game is won" do 
-          expect(game.won?(board)).to eq(bool)
+          expect(game_eval.won?(board)).to eq(bool)
         end
       end
     end

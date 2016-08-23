@@ -4,7 +4,7 @@ module TicTacToe
   describe Game do 
     let(:game_turn) {
       GameTurn.new(
-        Board.new, ConsoleUI.new(WrapperIO.new), EvalGame.new, Validation.new
+        Board.new, ConsoleUI.new(WrapperIO.new), GameEval.new, Validation.new
     )}
 
     let(:marker_loop) {
@@ -14,7 +14,7 @@ module TicTacToe
     let(:end_game) { EndGame.new(ConsoleUI.new(WrapperIO))
     }
 
-    let(:eval_game) {EvalGame.new}
+    let(:eval_game) {GameEval.new}
 
     describe ".run" do 
       context "player 1 wins the game and is symbol X" do 

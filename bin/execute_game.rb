@@ -7,16 +7,16 @@ wrapper = TicTacToe::WrapperIO.new
 
 consoleui = TicTacToe::ConsoleUI.new(wrapper)
 
-eval_game = TicTacToe::EvalGame.new
+game_eval = TicTacToe::GameEval.new
 
 validation = TicTacToe::Validation.new
 
-game_turn = TicTacToe::GameTurn.new(board, consoleui , eval_game, validation)
+game_turn = TicTacToe::GameTurn.new(board, consoleui , game_eval, validation)
 
 symbol_loop = TicTacToe::MarkerLoop.new(validation, consoleui)
  
 end_game = TicTacToe::EndGame.new(consoleui)
 
-game = TicTacToe::Game.new(game_turn, symbol_loop, end_game, eval_game)
+game = TicTacToe::Game.new(game_turn, symbol_loop, end_game, game_eval)
 
 game.run

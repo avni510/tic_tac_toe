@@ -15,7 +15,7 @@ module TicTacToe
       expect(game_turn).to receive(:valid_move_loop).and_return(move)
     end
     
-    let(:eval_game) { EvalGame.new }
+    let(:eval_game) { GameEval.new }
     let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
