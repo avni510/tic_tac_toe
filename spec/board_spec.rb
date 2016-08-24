@@ -28,7 +28,6 @@ module TicTacToe
           expect(board.fill(position, marker)).to eq(grid)
         end
       end
-
     end
   end
 end

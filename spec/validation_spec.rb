@@ -7,31 +7,30 @@ module TicTacToe
 
     describe ".move_valid?" do 
 
-      board = [
-        "O", "1", "2", 
-        "X", "4", "5", 
-        "6", "7", "8"
-      ]
-      it "can check if a valid board position was entered" do 
-        [ ["5", true],
+      it "checks if a valid board position was entered" do 
+        board = [
+          "O", "1", "2", 
+          "X", "4", "5", 
+          "6", "7", "8" ]
+
+        [ 
+          ["5", true],
           ["10", false]
         ].each do |position, bool|
           expect(validation.move_valid?(board, position)).to eq(bool)
         end
       end
-    
-      it "can check if the move entered is open" do 
-        expect(validation.move_valid?(board, '0')).to eq(false)
-      end
     end
 
-    describe ".move_valid?" do 
+    describe ".marker_valid?" do 
       
       it "can check if a valid symbol was entered" do 
-        [ ["p", false], 
-          ["o", true],
-        ]
-
+        [ 
+          ["p", false], 
+          ["o", true]
+        ].each do |marker, bool|
+          expect(validation.marker_valid?(marker)).to eq(bool)
+        end
       end
     end
   end
