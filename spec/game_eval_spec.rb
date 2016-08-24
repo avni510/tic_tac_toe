@@ -6,35 +6,35 @@ module TicTacToe
 
     describe ".player_won_or_tied" do
       context "player 1 is 'X' and player 1 won the game" do
-        it "returns 1" do
+        it "returns 'player_one'" do
           board = [ 
             "X", "O", "2", 
             "3", "X", "O",
             "6", "7", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(1)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('player_one')
         end
       end
 
       context "player 2 is 'O' and player 2 won the game" do
-        it 'returns 2' do
+        it "returns 'player_two'" do
           board = [
             "X", "O", "2", 
             "3", "O", "X", 
             "6", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(2)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('player_two')
         end
       end
 
       context "the game is tied" do
-        it 'returns 0' do
+        it "returns 'tied'" do
           board = [
             "X", "X", "O", 
             "O", "O", "X", 
             "X", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(0)
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('tied')
         end
       end
     end

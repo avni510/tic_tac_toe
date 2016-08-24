@@ -52,7 +52,8 @@ module TicTacToe
       @wrapper.puts_string("")
     end
     
-    def won_message(player_num)
+    def won_message(player_won)
+      player_num = player_won == 'player_one' ? 1 : 2
       @wrapper.puts_string("Player #{player_num} has won")
     end
 

@@ -7,4 +7,5 @@
   require "marker_loop"
   require "validation"
   require "wrapper_io"
+  require "player"
 

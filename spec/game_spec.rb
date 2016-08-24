@@ -20,10 +20,11 @@ module TicTacToe
 
     let(:game_eval) {GameEval.new}
 
+    let(:player) {Player.new}
     describe ".run" do 
       context "player 1 wins the game and is symbol X" do 
         it "runs through a game of tic tac toe" do 
-          game = Game.new(game_turn, marker_loop, game_completion, game_eval)
+          game = Game.new(game_turn, marker_loop, game_completion, game_eval, player)
           
           expect(marker_loop).to receive(:marker_selection).and_return(["X", "O"])
           

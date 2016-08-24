@@ -117,8 +117,8 @@ module TicTacToe
     describe ".won_message" do 
       context "Player 1 wins the game" do 
         it "prints which player has won" do
-          expect(mock_wrapper).to receive(:puts_string).with("Player 1 has won").exactly(1).times
-          console_ui.won_message(1)
+          expect(mock_wrapper).to receive(:puts_string).with("Player 2 has won").exactly(1).times
+          console_ui.won_message("player_two")
         end
       end
     end

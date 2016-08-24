@@ -7,6 +7,7 @@ require_relative "validation"
 require_relative "marker_loop"
 require_relative "game_turn"
 require_relative "game_completion"
+require_relative "player"
 
 module TicTacToe
 end
