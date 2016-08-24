@@ -1,10 +1,10 @@
 module TicTacToe
   class GameTurn
 
-    def initialize(board, console_ui, validation)
-      @board = board 
-      @console_ui = console_ui 
-      @validation = validation
+    def initialize(args)
+      @board = args[:board]
+      @console_ui = args[:console_ui]
+      @validation = args[:validation]
     end
 
     def execute(player, marker)

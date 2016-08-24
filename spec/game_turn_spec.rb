@@ -41,7 +41,11 @@ module TicTacToe
               "X", "O", "X"
               ])
 
-              game_turn = GameTurn.new(board, mock_console_ui, validation)
+              game_turn = GameTurn.new(
+                { :board => board, 
+                  :console_ui => mock_console_ui, 
+                  :validation => validation
+              })
 
               allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
 
@@ -69,7 +73,11 @@ module TicTacToe
             "O", "X", "X"
           ])
           
-          game_turn = GameTurn.new(board, mock_console_ui, validation)
+          game_turn = GameTurn.new(
+            { :board => board, 
+              :console_ui => mock_console_ui, 
+              :validation => validation
+          })
           
           move_valid_loop(game_turn, move)
          
@@ -93,9 +101,13 @@ module TicTacToe
              "3", "4", "5", 
              "6", "7", "O"
             ])
-          
-          game_turn = GameTurn.new(board, mock_console_ui, validation)
 
+          game_turn = GameTurn.new(
+            { :board => board, 
+              :console_ui => mock_console_ui, 
+              :validation => validation
+          })
+          
           move_valid_loop(game_turn, move)
 
           result = game_turn.execute(player_num, marker)
@@ -114,8 +126,11 @@ module TicTacToe
                 "6", "X", "X"
               ])
 
-
-              game_turn = GameTurn.new(board, mock_console_ui, validation)
+              game_turn = GameTurn.new(
+                { :board => board, 
+                  :console_ui => mock_console_ui, 
+                  :validation => validation
+              })
 
               move_valid_loop(game_turn, move)
 
@@ -146,7 +161,11 @@ module TicTacToe
               move = second_move
             end
 
-            game_turn = GameTurn.new(board, mock_console_ui, validation)
+            game_turn = GameTurn.new(
+              { :board => board, 
+                :console_ui => mock_console_ui, 
+                :validation => validation
+            })
 
             game_turn.execute(player_num, marker)
           end

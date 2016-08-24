@@ -2,10 +2,14 @@ module TicTacToe
   require 'spec_helper'
 
   describe Game do 
+    
+    params = {
+    :console_ui => ConsoleUI.new(WrapperIO.new), 
+    :board => Board.new,
+    :validation => Validation.new}
+    
     let(:game_turn) {
-      GameTurn.new(
-        Board.new, ConsoleUI.new(WrapperIO.new), Validation.new
-    )}
+      GameTurn.new(params)}
 
     let(:marker_loop) {
       MarkerLoop.new(Validation.new, ConsoleUI.new(WrapperIO.new))
