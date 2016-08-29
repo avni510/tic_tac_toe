@@ -11,11 +11,8 @@ game_eval = TicTacToe::GameEval.new
 
 validation = TicTacToe::Validation.new
 
-player = TicTacToe::Player.new
-
 params = 
-  { 
-    :validation => validation, 
+  { :validation => validation, 
     :console_ui => consoleui}
     
 game_turn = TicTacToe::GameTurn.new(params)
@@ -24,6 +21,6 @@ symbol_loop = TicTacToe::MarkerLoop.new(validation, consoleui)
  
 game_completion = TicTacToe::GameCompletion.new(consoleui)
 
-game = TicTacToe::Game.new(game_turn, symbol_loop, game_completion, game_eval, player)
+game = TicTacToe::Game.new(game_turn, symbol_loop, game_completion, game_eval)
 
 game.run
