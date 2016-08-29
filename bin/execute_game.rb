@@ -14,7 +14,7 @@ validation = TicTacToe::Validation.new
 player = TicTacToe::Player.new
 
 params = 
-  { :board => board,
+  { 
     :validation => validation, 
     :console_ui => consoleui}
     

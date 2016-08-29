@@ -2,7 +2,7 @@ module TicTacToe
   class GameTurn
 
     def initialize(args)
-      @board = args[:board]
+      @board = args.fetch(:board, Board.new)
       @console_ui = args[:console_ui]
       @validation = args[:validation]
     end
@@ -11,7 +11,7 @@ module TicTacToe
       move = @console_ui.move_messages(@board.nine_space_array, player, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
-    jnd
+    end
     
     private
 
