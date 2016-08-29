@@ -1,11 +1,1 @@
-  require "board"
-  require "console_ui"
-  require "game_completion"
-  require "game_eval"
-  require "game"
-  require "game_turn"
-  require "marker_loop"
-  require "validation"
-  require "wrapper_io"
-  require "player"
-
+require 'tic_tac_toe'

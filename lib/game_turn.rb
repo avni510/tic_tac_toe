@@ -11,8 +11,7 @@ module TicTacToe
       move = @console_ui.move_messages(@board.nine_space_array, player, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
-      @board.nine_space_array
-    end
+    jnd
     
     private
 
