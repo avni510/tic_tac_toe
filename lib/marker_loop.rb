@@ -13,11 +13,13 @@ module TicTacToe
       @console_ui.select_marker_message
       p1_marker = marker_selection_loop
       p1_marker.upcase!
-      p2_marker = marker_assignment(p1_marker, TTT_MARKER1 , TTT_MARKER2)
+      p2_marker = marker_assignment(p1_marker)
       @console_ui.puts_markers(p1_marker, p2_marker)
       @console_ui.puts_space
       return p1_marker, p2_marker 
     end
+
+  private
 
     def marker_selection_loop
       marker = @console_ui.user_input
@@ -28,8 +30,8 @@ module TicTacToe
       marker
     end
 
-    def marker_assignment(p1_marker, game_marker1, game_marker2)
-      p1_marker == game_marker1 ? game_marker2 : game_marker1
+    def marker_assignment(p1_marker)
+      p1_marker == TTT_MARKER2 ? TTT_MARKER1 : TTT_MARKER2
     end
   end
 end

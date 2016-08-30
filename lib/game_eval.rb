@@ -4,9 +4,8 @@ module TicTacToe
 
     def player_won_or_tied(board, marker1, marker2)
       if won?(board)
-        return board.count(marker1) > board.count(marker2) ? 'player_one' : 'player_two'
+        board.count(marker1) > board.count(marker2) ? marker1 : marker2
       end
-      'tied' if tied?(board)
     end
       
     def game_over?(board) 

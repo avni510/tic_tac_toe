@@ -12,7 +12,7 @@ module TicTacToe
             "3", "X", "O",
             "6", "7", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('player_one')
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('X')
         end
       end
 
@@ -23,7 +23,7 @@ module TicTacToe
             "3", "O", "X", 
             "6", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('player_two')
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('O')
         end
       end
 
@@ -34,7 +34,7 @@ module TicTacToe
             "O", "O", "X", 
             "X", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('tied')
+          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(nil)
         end
       end
     end
