@@ -1,10 +1,18 @@
 module TicTacToe
 
-  class EvalGame
+  class GameEval
 
-    def game_over?(board)
+    def player_won_or_tied(board, marker1, marker2)
+      if won?(board)
+        board.count(marker1) > board.count(marker2) ? marker1 : marker2
+      end
+    end
+      
+    def game_over?(board) 
       tied?(board) || won?(board)
     end
+    
+  private
 
     def tied?(board)
       board.all?{ |space| space == "X" || space == "O"}
@@ -14,7 +22,7 @@ module TicTacToe
       won_by_rows(board) || won_by_columns(board) || won_by_diagonals(board)
     end
 
-  private
+    
     def won_by_rows(board)
       [board[0], board[1], board[2]].uniq.length == 1 ||
       [board[3], board[4], board[5]].uniq.length == 1 ||

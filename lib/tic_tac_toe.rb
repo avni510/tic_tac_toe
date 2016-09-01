@@ -1,9 +1,13 @@
 require_relative "board"
-require_relative "console_interface"
-require_relative "eval_game"
+require_relative "console_ui"
+require_relative "game_eval"
 require_relative "game"
-require_relative "wrapperio"
+require_relative "wrapper_io"
 require_relative "validation"
+require_relative "marker_loop"
+require_relative "game_turn"
+require_relative "game_completion"
+require_relative "player"
 
 module TicTacToe
 end

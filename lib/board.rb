@@ -8,23 +8,8 @@ module TicTacToe
     end
 
     def fill(position, symbol)
-      return false unless position_conditions?(position)
       @nine_space_array[position.to_i] = symbol      
       @nine_space_array
-    end
-
-  private 
-
-    def position_conditions?(position)
-      valid_position?(position) && position_open?(position)
-    end
-
-    def valid_position?(position)
-      not position !~ /^[0-8]{1}$/
-    end
-
-    def position_open?(position)
-      not nine_space_array[position.to_i] !~ /^[0-8]{1}$/
     end
   end
 end

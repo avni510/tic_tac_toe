@@ -1,31 +1,32 @@
 module TicTacToe
-  require "board"
+  require 'spec_helper'
 
   describe Board do 
 
     let(:board) {Board.new}
 
     it "returns a blank board" do 
-      expect(board.nine_space_array).to eq(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+      grid = [
+        "0", "1", "2", 
+        "3", "4", "5", 
+        "6", "7", "8"
+      ]  
+      expect(board.nine_space_array).to eq(grid)
     end
 
     describe ".fill" do 
       [
         ["2", "X"], 
         ["2", "O"]
-      ].each do |position, symbol|
+      ].each do |position, marker|
         it "returns a board with a filled in space" do 
-          expect(board.fill(position, symbol)).to eq(["0", "1", "#{symbol}", "3", "4", "5", "6", "7", "8"])
+          grid = [
+            "0", "1", "#{marker}", 
+            "3", "4", "5", 
+            "6", "7", "8"
+          ]  
+          expect(board.fill(position, marker)).to eq(grid)
         end
-      end
-
-      it "checks if the position is a valid board position" do 
-        expect(board.fill("10", "O")).to eq(false)
-      end
-
-      it "checks if a position is open" do 
-        board.fill("4", "X")
-        expect(board.fill('4', "O")).to eq(false)
       end
     end
   end

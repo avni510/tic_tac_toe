@@ -2,13 +2,14 @@ module TicTacToe
 
   class Validation
 
-    def board_conditions?(board, move)
+    def move_valid?(board, move)
       valid_position?(move) && position_open?(board, move)
     end
     
-    def symbol_conditions?(symbol)
-      not symbol !~ /^(X|O|x|o)$/
+    def marker_valid?(marker)
+      not marker !~ /^(X|O|x|o)$/
     end 
+
   private 
 
     def valid_position?(move)
