@@ -7,7 +7,7 @@ module TicTacToe
     ttt_marker2 = "O"
     
 
-    describe ".player_won_or_tied" do
+    describe ".player_won" do
       let(:player1) { Player.new(1, 'X') }
       let(:player2) { Player.new(2, 'O') }
       
@@ -19,7 +19,7 @@ module TicTacToe
             "6", "7", "X"
           ]
 
-          expect(game_eval.player_won_or_tied(board, player1, player2)).to eq(player1)
+          expect(game_eval.player_won(board, player1, player2)).to eq(player1)
         end
       end
 
@@ -30,7 +30,7 @@ module TicTacToe
             "3", "O", "X", 
             "6", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, player1, player2)).to eq(player2)
+          expect(game_eval.player_won(board, player1, player2)).to eq(player2)
         end
       end
 
@@ -41,7 +41,7 @@ module TicTacToe
             "O", "O", "X", 
             "X", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, player1, player2)).to eq(nil)
+          expect(game_eval.player_won(board, player1, player2)).to eq(nil)
         end
       end
     end
