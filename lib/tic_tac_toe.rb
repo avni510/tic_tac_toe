@@ -8,6 +8,7 @@ require_relative "marker_loop"
 require_relative "game_turn"
 require_relative "game_completion"
 require_relative "player"
+require_relative "console_runner"
 
 module TicTacToe
 end

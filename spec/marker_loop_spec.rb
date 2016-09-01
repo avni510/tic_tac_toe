@@ -2,9 +2,9 @@ module TicTacToe
   require 'spec_helper' 
 
   describe MarkerLoop do 
-    let(:mock_console_ui) { double () } 
+    let(:mock_console_ui) { double } 
     let(:validation) { Validation.new }
-    let(:marker_loop) { marker_loop = MarkerLoop.new(validation, mock_console_ui) }
+    let(:marker_loop) { MarkerLoop.new(validation, mock_console_ui) }
 
     before(:each) do 
       allow(mock_console_ui).to receive(:select_marker_message)

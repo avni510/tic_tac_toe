@@ -3,7 +3,7 @@ module TicTacToe
 
   describe GameCompletion do 
     
-    let(:mock_console_ui) { double () }
+    let(:mock_console_ui) { double }
     let(:game_eval) { GameEval.new } 
     let(:game_completion) { GameCompletion.new(mock_console_ui, game_eval) }
 

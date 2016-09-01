@@ -2,11 +2,10 @@ module TicTacToe
   require 'spec_helper'
 
   describe ConsoleUI do 
-    let(:mock_wrapper) { double() }
+    let(:mock_wrapper) { double }
     let(:console_ui) { ConsoleUI.new(mock_wrapper) }
 
     describe ".user_input" do 
-
       user_input = ['X', '1'].each do |input|
         it "prompts the user to enter into the console" do 
           expect(mock_wrapper).to receive(:get_action).and_return(input)
@@ -47,7 +46,7 @@ module TicTacToe
           "0", "1", "2", 
           "X", "O", "5", 
           "O", "7", "8"
-        ]
+         ]
         console_ui.display_board(board)
       end
     end

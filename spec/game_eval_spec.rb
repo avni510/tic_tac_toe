@@ -3,14 +3,10 @@ module TicTacToe
 
   describe GameEval do 
     let(:game_eval){ GameEval.new }
-    ttt_marker1 = "X"
-    ttt_marker2 = "O"
-    
+    let(:player1) { Player.new(1, 'X') }
+    let(:player2) { Player.new(2, 'O') }
 
     describe ".player_won" do
-      let(:player1) { Player.new(1, 'X') }
-      let(:player2) { Player.new(2, 'O') }
-      
       context "player 1 won the game" do
         it "returns player1" do
           board = [ 
@@ -79,7 +75,7 @@ module TicTacToe
       ], true]
       ].each do |board, bool|
         it "returns true if the game is over and false otherwise" do 
-          expect(game_eval.game_over?(board, ttt_marker1, ttt_marker2)).to eq(bool)
+          expect(game_eval.game_over?(board, player1, player2)).to eq(bool)
         end
       end
     end
