@@ -15,7 +15,8 @@ module TicTacToe
 
         [ 
           ["5", true],
-          ["10", false]
+          ["10", false], 
+          ["3", false]
         ].each do |position, bool|
           expect(validation.move_valid?(board, position)).to eq(bool)
         end
@@ -27,7 +28,8 @@ module TicTacToe
       it "can check if a valid symbol was entered" do 
         [ 
           ["p", false], 
-          ["o", true]
+          ["o", true], 
+          ['X', true]
         ].each do |marker, bool|
           expect(validation.marker_valid?(marker)).to eq(bool)
         end

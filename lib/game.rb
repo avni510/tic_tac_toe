@@ -21,7 +21,7 @@ module TicTacToe
         current_player = toggle_player(current_player)
       end until @game_eval.game_over?(board_array)
       
-      @game_completion.game_over_messages(board_array, marker1, marker2)
+      @game_completion.game_over_messages(board_array, @player1, @player2)
     end
 
     def toggle_player(current_player)

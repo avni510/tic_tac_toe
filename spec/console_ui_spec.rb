@@ -73,7 +73,7 @@ module TicTacToe
     describe ".move_messages" do 
       context "it is player 1's turn and their marker is 'O' " do 
         
-        player = 1
+        player_num = 1
         marker = 'O'
 
         it "displays the appropiate messages for a user's turn" do 
@@ -83,7 +83,7 @@ module TicTacToe
             "O", "7", "8"
           ]
 
-          expect(console_ui).to receive(:player_turn_message).with(player, marker)
+          expect(console_ui).to receive(:player_turn_message).with(player_num, marker)
 
           expect(console_ui).to receive(:display_board).with(board)
           
@@ -93,7 +93,7 @@ module TicTacToe
 
           expect(console_ui).to receive(:user_input).and_return("5")
 
-          expect(console_ui.move_messages(board, player, marker)).to eq('5')
+          expect(console_ui.move_messages(board, player_num, marker)).to eq('5')
         end
       end
     end    

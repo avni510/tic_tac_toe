@@ -15,7 +15,6 @@ module TicTacToe
     describe ".game_over_messages" do 
       context "player 1 won" do 
         it "displays a won message" do 
-          marker1, marker2 = 'X', 'O'
 
           board_array = [
             "X", "O", "2",
@@ -23,29 +22,32 @@ module TicTacToe
             "6", "7", "X"
           ]
 
-          game_result = game_eval.player_won_or_tied(board_array, marker1, marker2)
+          player1, player2 = Player.new(1, 'X'), Player.new(2, 'O')
+
+          game_result = game_eval.player_won_or_tied(board_array, player1, player2)
 
           expect(mock_console_ui).to receive(:won_message).with("Player 1")
 
-          game_completion.game_over_messages(board_array, marker1, marker2)
+          game_completion.game_over_messages(board_array, player1, player2)
         end
       end
 
       context "the game ended in a tie" do 
         it "displays a tied message" do 
-          marker1, marker2 = 'O', 'X'
 
           board_array = [
             "X", "O", "X",
             "X", "O", "O",
             "O", "X", "X"
           ]
+          
+          player1, player2 = Player.new(1, 'O'), Player.new(2, 'X')
 
-          game_result = game_eval.player_won_or_tied(board_array, marker1, marker2)
+          game_result = game_eval.player_won_or_tied(board_array, player1, player2)
 
           expect(mock_console_ui).to receive(:tied_message)
 
-          game_completion.game_over_messages(board_array, 'X', 'O')
+          game_completion.game_over_messages(board_array, player1, player2)
         end
       end
     end
