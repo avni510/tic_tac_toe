@@ -1,6 +1,8 @@
 module TicTacToe
 
   class Game 
+    TTT_MARKER1 = "X"
+    TTT_MARKER2 = "O"
     
     def initialize(game_turn, marker_loop, game_completion, game_eval)
       @game_turn = game_turn
@@ -10,7 +12,7 @@ module TicTacToe
     end
 
     def run 
-      marker1, marker2 = @marker_loop.marker_selection
+      marker1, marker2 = @marker_loop.marker_selection(TTT_MARKER1, TTT_MARKER2)
 
       @player1, @player2 = Player.new(1, marker1), Player.new(2, marker2)
 
@@ -19,9 +21,9 @@ module TicTacToe
       begin 
         board_array = @game_turn.execute(current_player.ord_num, current_player.marker)
         current_player = toggle_player(current_player)
-      end until @game_eval.game_over?(board_array)
+      end until @game_eval.game_over?(board_array, TTT_MARKER1, TTT_MARKER2)
       
-      @game_completion.game_over_messages(board_array, marker1, marker2)
+      @game_completion.game_over_messages(board_array, @player1, @player2)
     end
 
     def toggle_player(current_player)

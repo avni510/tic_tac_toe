@@ -6,14 +6,12 @@ module TicTacToe
       @game_eval = game_eval
     end
 
-    def game_over_messages(board_array, marker1, marker2)
+    def game_over_messages(board_array, player1, player2)
       @console_ui.display_board(board_array)
       @console_ui.puts_space
-      game_result = @game_eval.player_won_or_tied(board_array, marker1, marker2)
-      if game_result ==  marker1 
-        @console_ui.won_message("Player 1")
-      elsif game_result == marker2
-        @console_ui.won_message("Player 2")
+      winning_player = @game_eval.player_won(board_array, player1, player2)
+      if winning_player
+        @console_ui.won_message("Player #{winning_player.ord_num}")
       else
         @console_ui.tied_message
       end

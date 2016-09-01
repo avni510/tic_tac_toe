@@ -3,90 +3,83 @@ module TicTacToe
 
   describe GameEval do 
     let(:game_eval){ GameEval.new }
+    ttt_marker1 = "X"
+    ttt_marker2 = "O"
+    
 
-    describe ".player_won_or_tied" do
-      context "player 1 is 'X' and player 1 won the game" do
-        it "returns 'player_one'" do
+    describe ".player_won" do
+      let(:player1) { Player.new(1, 'X') }
+      let(:player2) { Player.new(2, 'O') }
+      
+      context "player 1 won the game" do
+        it "returns player1" do
           board = [ 
             "X", "O", "2", 
             "3", "X", "O",
             "6", "7", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('X')
+
+          expect(game_eval.player_won(board, player1, player2)).to eq(player1)
         end
       end
 
-      context "player 2 is 'O' and player 2 won the game" do
-        it "returns 'player_two'" do
+      context "player 2 won the game" do
+        it "returns player2" do
           board = [
             "X", "O", "2", 
             "3", "O", "X", 
             "6", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq('O')
+          expect(game_eval.player_won(board, player1, player2)).to eq(player2)
         end
       end
 
       context "the game is tied" do
-        it "returns 'tied'" do
+        it "returns nil" do
           board = [
             "X", "X", "O", 
             "O", "O", "X", 
             "X", "O", "X"
           ]
-          expect(game_eval.player_won_or_tied(board, 'X', 'O')).to eq(nil)
+          expect(game_eval.player_won(board, player1, player2)).to eq(nil)
         end
       end
     end
 
     describe ".game_over" do
-      it 'can evaluate if the game is over' do
-        board = [
-          "X", "O", "X", 
-          "O", "X", "O", 
-          "X", "O", "X"
-        ]
-        expect(game_eval.game_over?(board)).to eq(true)
-      end
-
-      it "can evaluate if a game is tied" do 
-        board = [
-          "X", "X", "O", 
+      [
+        [[ "X", "X", "O", 
           "O", "O", "X", 
           "X", "O", "X"
-        ]
-        expect(game_eval.game_over?(board)).to eq(true)
-      end
-
-      [
+      ], true], 
         [[
           "X", "X", "X",
           "3", "4", "5", 
           "6", "7", "8"
-          ], true],
+      ], true],
         [[
           "0", "1", "2", 
           "O", "O", "X", 
           "6", "7", "8"
-          ], false],
+      ], false],
         [[
           "O", "1", "2", 
           "O", "4", "5", 
           "O", "7", "8"
-          ], true],
+      ], true],
         [[
           "O", "1", "2", 
           "3", "4", "5", 
           "O", "X", "X"
-          ], false], 
+      ], false], 
         [[
           "X", "1", "2", 
           "3", "X", "5", 
           "6", "7", "X"
-          ], true]
+      ], true]
       ].each do |board, bool|
-        it "can evaluate if a game is won" do 
-          expect(game_eval.game_over?(board)).to eq(bool)
+        it "returns true if the game is over and false otherwise" do 
+          expect(game_eval.game_over?(board, ttt_marker1, ttt_marker2)).to eq(bool)
         end
       end
     end

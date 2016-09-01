@@ -14,10 +14,13 @@ module TicTacToe
     end
 
     describe ".marker_selection" do 
+      ttt_marker1 = 'X'
+      ttt_marker2 = 'O'
+
       it "prompts the user to select a marker" do 
         expect(mock_console_ui).to receive(:user_input).and_return("X")
 
-        marker_loop.marker_selection
+        marker_loop.marker_selection(ttt_marker1, ttt_marker2)
       end
 
       context "Player 1 chooses 'O'" do 
@@ -27,20 +30,20 @@ module TicTacToe
         end 
 
         it "returns 'X' for Player 2" do 
-          result = marker_loop.marker_selection
+          result = marker_loop.marker_selection(ttt_marker1, ttt_marker2)
           expect(result).to eq(["O", "X"])
         end
 
         it "displays the markers of each player" do 
           expect(mock_console_ui).to receive(:puts_markers).with("O", "X")
 
-          marker_loop.marker_selection
+          marker_loop.marker_selection(ttt_marker1, ttt_marker2)
         end
 
         it "returns uppercase markers" do
           allow(mock_console_ui).to receive(:user_input).and_return("o")
 
-          result = marker_loop.marker_selection
+          result = marker_loop.marker_selection(ttt_marker1, ttt_marker2)
           expect(result).to eq(["O", "X"])
         end
       end
@@ -54,7 +57,7 @@ module TicTacToe
           expect(mock_console_ui).to receive(:valid_marker_message)
 
           expect(validation).to receive(:marker_valid?).with('X').and_return(true)
-          marker_loop.marker_selection
+          marker_loop.marker_selection(ttt_marker1, ttt_marker2)
         end
       end
     end

@@ -2,20 +2,20 @@ module TicTacToe
 
   class GameEval
 
-    def player_won_or_tied(board, marker1, marker2)
+    def player_won(board, player1, player2)
       if won?(board)
-        board.count(marker1) > board.count(marker2) ? marker1 : marker2
+        board.count(player1.marker) > board.count(player2.marker) ? player1 : player2
       end
     end
       
-    def game_over?(board) 
-      tied?(board) || won?(board)
+    def game_over?(board, ttt_marker1, ttt_marker2)
+      tied?(board, ttt_marker1, ttt_marker2) || won?(board)
     end
     
   private
 
-    def tied?(board)
-      board.all?{ |space| space == "X" || space == "O"}
+    def tied?(board, ttt_marker1, ttt_marker2)
+      board.all?{ |space| space == ttt_marker1 || space == ttt_marker2}
     end
 
     def won?(board)
