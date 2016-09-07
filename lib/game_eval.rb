@@ -8,14 +8,14 @@ module TicTacToe
       end
     end
       
-    def game_over?(board, player1, player2)
-      tied?(board, player1, player2) || won?(board)
+    def game_over?(board, marker1, marker2)
+      tied?(board, marker1, marker2) || won?(board)
     end
     
   private
 
-    def tied?(board, player1, player2)
-      board.all?{ |space| space == player1.marker || space == player2.marker}
+    def tied?(board, marker1, marker2)
+      board.all?{ |space| space == marker1 || space == marker2}
     end
 
     def won?(board)

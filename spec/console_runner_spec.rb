@@ -13,14 +13,6 @@ module TicTacToe
 
         game_completion = GameCompletion.new(console_ui, game_eval)
 
-        params = {
-        :console_ui => console_ui,
-        :board => Board.new,
-        :validation => Validation.new
-        }
-
-        game_turn = GameTurn.new(params)
-
         marker1, marker2 = 'X', 'O'
 
         expect(marker_loop).to receive(:marker_selection).and_return([marker1, marker2])

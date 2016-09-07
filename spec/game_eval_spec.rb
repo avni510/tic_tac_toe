@@ -75,7 +75,7 @@ module TicTacToe
       ], true]
       ].each do |board, bool|
         it "returns true if the game is over and false otherwise" do 
-          expect(game_eval.game_over?(board, player1, player2)).to eq(bool)
+          expect(game_eval.game_over?(board, 'X', 'O')).to eq(bool)
         end
       end
     end

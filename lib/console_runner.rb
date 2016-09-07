@@ -7,8 +7,8 @@ module TicTacToe
       @marker_loop = marker_loop
       @game_completion = game_completion
       params = {
-      :console_ui => console_ui,
-      :validation => Validation.new
+        :console_ui => console_ui,
+        :validation => Validation.new
       }
       @game_turn = GameTurn.new(params)
       @game_eval = GameEval.new

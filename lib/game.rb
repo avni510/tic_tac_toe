@@ -16,7 +16,7 @@ module TicTacToe
       begin 
         board_array = @game_turn.execute(current_player.ord_num, current_player.marker)
         current_player = toggle_player(current_player)
-      end until @game_eval.game_over?(board_array, @player1, @player2)
+      end until @game_eval.game_over?(board_array, player1.marker, player2.marker)
       board_array
     end
 
