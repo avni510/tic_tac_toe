@@ -27,10 +27,7 @@ module TicTacToe
       context "the game is a space away from being won" do
         move = '2'
       
-        [
-          [1, 'X'],
-          [2, 'O']
-        ].each do |player_num, marker|
+        ['X', 'O'].each do |marker|
 
           context "space #{move} is the winning move" do 
             it "returns the winning board" do 
@@ -45,15 +42,15 @@ module TicTacToe
                 { :board => board, 
                   :console_ui => mock_console_ui, 
                   :validation => validation
-              })
+                })
 
-              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, player_num, marker).and_return(move)
+              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, marker).and_return(move)
 
               validate_move(game_turn, move)
 
               board.fill(move, marker)
 
-              result = game_turn.execute(player_num, marker)
+              result = game_turn.execute(marker)
               expect(result).to eq(board.nine_space_array)
             end
           end
@@ -62,7 +59,6 @@ module TicTacToe
 
       context 'the game is a space away from being tied' do 
 
-        player_num = 1
         move = '1'
         marker = 'X'
 
@@ -77,20 +73,19 @@ module TicTacToe
             { :board => board, 
               :console_ui => mock_console_ui, 
               :validation => validation
-          })
+            })
           
           validate_move(game_turn, move)
          
           board.fill(move, marker)
           
-          result = game_turn.execute(player_num, marker)
+          result = game_turn.execute(marker)
           expect(result).to eq(board.nine_space_array)
         end
       end
 
       context 'the game is neither won or tied' do 
 
-        player_num = 1
         marker = 'X'
         
         it 'returns the board if the game is neither won or tied' do 
@@ -106,11 +101,11 @@ module TicTacToe
             { :board => board, 
               :console_ui => mock_console_ui, 
               :validation => validation
-          })
+            })
           
           validate_move(game_turn, move)
 
-          result = game_turn.execute(player_num, marker)
+          result = game_turn.execute(marker)
           expect(result).to eq(board.nine_space_array)
         end
 
@@ -130,11 +125,11 @@ module TicTacToe
                 { :board => board, 
                   :console_ui => mock_console_ui, 
                   :validation => validation
-              })
+                })
 
               validate_move(game_turn, move)
 
-              result = game_turn.execute(player_num, marker)
+              result = game_turn.execute(marker)
               expect(result).to eq(board.nine_space_array)
             end
           end
@@ -165,9 +160,9 @@ module TicTacToe
               { :board => board, 
                 :console_ui => mock_console_ui, 
                 :validation => validation
-            })
+              })
 
-            game_turn.execute(player_num, marker)
+            game_turn.execute(marker)
           end
         end
       end

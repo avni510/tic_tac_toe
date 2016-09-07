@@ -7,8 +7,8 @@ module TicTacToe
       @validation = args[:validation]
     end
 
-    def execute(player, marker)
-      move = @console_ui.move_messages(@board.nine_space_array, player, marker)
+    def execute(marker)
+      move = @console_ui.move_messages(@board.nine_space_array, marker)
       move = valid_move_loop(move)
       @board.fill(move, marker)
     end

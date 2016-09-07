@@ -1,5 +1,4 @@
 module TicTacToe
-
   class ConsoleRunner
     TTT_MARKER1, TTT_MARKER2 = 'X', 'O'
 
@@ -21,7 +20,7 @@ module TicTacToe
 
       completed_game_board = game.players_turns
 
-      @game_completion.game_over_messages(completed_game_board, game.player1, game.player2)
+      @game_completion.game_over_messages(completed_game_board, game.player1.marker, game.player2.marker)
     end
   end
 end

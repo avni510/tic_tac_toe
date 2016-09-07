@@ -10,7 +10,7 @@ module TicTacToe
     end
 
     def select_marker_message
-      @wrapper.puts_string("Player 1 please enter either 'X' or 'O' for your symbol")
+      @wrapper.puts_string("Please enter either 'X' or 'O' for your symbol")
     end
 
     def valid_marker_message
@@ -29,12 +29,12 @@ module TicTacToe
       @wrapper.puts_string("Please select your move by entering a number 0 to 8")
     end
 
-    def player_turn_message(player, marker)
-      @wrapper.puts_string("It is Player #{player}'s turn and your symbol is #{marker}")
+    def player_turn_message(marker)
+      @wrapper.puts_string("It is Player #{marker}'s turn")
     end
 
-    def move_messages(board, player, marker)
-      player_turn_message(player, marker)
+    def move_messages(board, marker)
+      player_turn_message(marker)
       puts_space
       display_board(board)
       puts_space
@@ -52,8 +52,8 @@ module TicTacToe
       @wrapper.puts_string("")
     end
     
-    def won_message(player_won)
-      @wrapper.puts_string("#{player_won} has won")
+    def won_message(marker)
+      @wrapper.puts_string("Player #{marker} has won")
     end
 
     def tied_message
