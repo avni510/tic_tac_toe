@@ -9,6 +9,7 @@ module TicTacToe
       user_input = ['X', '1'].each do |input|
         it "prompts the user to enter into the console" do 
           expect(mock_wrapper).to receive(:get_action).and_return(input)
+          expect(console_ui).to receive(:puts_space)
           console_ui.user_input
         end
       end
@@ -126,6 +127,34 @@ module TicTacToe
       it "prints the game is tied" do 
         expect(mock_wrapper).to receive(:puts_string).with("The game ended in a tie").exactly(1).times
         console_ui.tied_message
+      end
+    end
+
+    describe ".game_menu_messages" do
+      it "prints the appropiate messages before the game menu is shown" do
+        expect(mock_wrapper).to receive(:puts_string).with("Please select which type of game you would like to play")
+        expect(console_ui).to receive(:puts_space).exactly(2).times
+        expect(mock_wrapper).to receive(:puts_string).with("Enter the number next to the choice")
+        console_ui.game_menu_messages
+      end
+    end
+
+    describe ".display_game_menu" do 
+      it "prints the game menu" do
+        menu_options = {
+          '1' => "1. Human v. Human", 
+          '2' => "2. Human v. Simple Computer"
+        }
+        expect(mock_wrapper).to receive(:puts_string).exactly(2).times
+        expect(console_ui).to receive(:puts_space)
+        console_ui.display_game_menu(menu_options)
+      end
+    end
+
+    describe ".valid_menu_choice" do
+      it "prints a message to enter a valid menu choice if an invalid one is entered" do
+        expect(mock_wrapper).to receive(:puts_string).with("Please enter a valid menu option")
+        console_ui.valid_menu_choice
       end
     end
   end

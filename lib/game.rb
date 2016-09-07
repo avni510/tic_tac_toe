@@ -4,11 +4,10 @@ module TicTacToe
     attr_reader :player1
     attr_reader :player2
 
-    def initialize(game_turn, game_eval, p1_marker, p2_marker)
+    def initialize(game_turn, game_eval, game_type)
       @game_turn = game_turn
       @game_eval = game_eval
-      @player1 = Player.new(p1_marker)
-      @player2 = Player.new(p2_marker)
+      @game_type = game_type
     end
 
     def players_turns

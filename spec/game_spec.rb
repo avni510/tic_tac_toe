@@ -3,14 +3,16 @@ module TicTacToe
 
   describe Game do 
     params = {
-    :console_ui => ConsoleUI.new(WrapperIO.new),
-    :board => Board.new,
-    :validation => Validation.new
+      :console_ui => ConsoleUI.new(WrapperIO.new),
+      :board => Board.new,
+      :validation => Validation.new
     }
     
     let(:game_turn) { GameTurn.new(params) }
 
     let(:game_eval) { GameEval.new }
+
+    let(:game_type) {GameType.new(ConsoleUI.new(WrapperIO.new)) }
 
     describe ".players_turns" do 
       context "player 2 wins the game" do 

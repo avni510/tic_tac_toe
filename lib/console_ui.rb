@@ -6,7 +6,9 @@ module TicTacToe
     end
 
     def user_input
-      @wrapper.get_action
+      input = @wrapper.get_action
+      puts_space
+      input
     end
 
     def select_marker_message
@@ -58,6 +60,24 @@ module TicTacToe
 
     def tied_message
       @wrapper.puts_string("The game ended in a tie")
+    end
+
+    def game_menu_messages
+      @wrapper.puts_string("Please select which type of game you would like to play")
+      puts_space
+      @wrapper.puts_string("Enter the number next to the choice")
+      puts_space
+    end
+
+    def display_game_menu(menu_options)
+      menu_options.each do |selection_num, game_type|
+        @wrapper.puts_string(game_type)
+      end
+      puts_space
+    end
+
+    def valid_menu_choice
+      @wrapper.puts_string("Please enter a valid menu option")
     end
   end
 end
