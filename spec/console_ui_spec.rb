@@ -16,7 +16,7 @@ module TicTacToe
 
     describe ".select_marker_message" do 
       it "prints a choice of symbols for the user" do 
-        expect(mock_wrapper).to receive(:puts_string).with("Player 1 please enter either 'X' or 'O' for your symbol").exactly(1).times
+        expect(mock_wrapper).to receive(:puts_string).with("Please enter either 'X' or 'O' for your symbol").exactly(1).times
         console_ui.select_marker_message
       end
     end
@@ -63,8 +63,8 @@ module TicTacToe
       context "it is Player 1's turn and they have 'X' as their marker" do 
         it "displays which player's turn it is and which marker they have" do
       
-          expect(mock_wrapper).to receive(:puts_string).with("It is Player 1's turn and your symbol is X")
-          console_ui.player_turn_message(1, 'X')
+          expect(mock_wrapper).to receive(:puts_string).with("It is Player X's turn")
+          console_ui.player_turn_message('X')
         end
       end
     end
@@ -82,7 +82,7 @@ module TicTacToe
             "O", "7", "8"
           ]
 
-          expect(console_ui).to receive(:player_turn_message).with(player_num, marker)
+          expect(console_ui).to receive(:player_turn_message).with(marker)
 
           expect(console_ui).to receive(:display_board).with(board)
           
@@ -92,7 +92,7 @@ module TicTacToe
 
           expect(console_ui).to receive(:user_input).and_return("5")
 
-          expect(console_ui.move_messages(board, player_num, marker)).to eq('5')
+          expect(console_ui.move_messages(board, marker)).to eq('5')
         end
       end
     end    
@@ -116,8 +116,8 @@ module TicTacToe
     describe ".won_message" do 
       context "Player 1 wins the game" do 
         it "prints which player has won" do
-          expect(mock_wrapper).to receive(:puts_string).with("Player 1 has won").exactly(1).times
-          console_ui.won_message("Player 1")
+          expect(mock_wrapper).to receive(:puts_string).with("Player X has won").exactly(1).times
+          console_ui.won_message("X")
         end
       end
     end

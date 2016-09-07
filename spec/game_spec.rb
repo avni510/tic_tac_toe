@@ -19,9 +19,9 @@ module TicTacToe
 
           game = Game.new(game_turn, game_eval, p1_marker, p2_marker)
           
-          player1, player2 = Player.new(1, 'X'), Player.new(2, 'O')
+          player1, player2 = Player.new('X'), Player.new('O')
 
-          expect(game_turn).to receive(:execute).with(player1.ord_num, player1.marker).and_return(
+          expect(game_turn).to receive(:execute).with(player1.marker).and_return(
             [ 
               "X", "O", "X",
               "3", "O", "X", 
@@ -35,7 +35,7 @@ module TicTacToe
               "6", "O", "8"
             ]
 
-          expect(game_turn).to receive(:execute).with(player2.ord_num, player2.marker).and_return(winning_board)
+          expect(game_turn).to receive(:execute).with(player2.marker).and_return(winning_board)
 
           game.players_turns
         end
