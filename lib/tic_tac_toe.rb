@@ -10,6 +10,8 @@ require_relative "game_completion"
 require_relative "player"
 require_relative "console_runner"
 require_relative "game_type"
+require_relative "computer"
+require_relative "human"
 
 module TicTacToe
 end

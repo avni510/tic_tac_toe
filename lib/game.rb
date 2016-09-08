@@ -10,7 +10,11 @@ module TicTacToe
       @game_type = game_type
     end
 
-    def players_turns
+    def players_turns(marker1, marker2)
+
+      @player1 = Player.new(marker1)
+      @player2 = Player.new(marker2) 
+
       current_player = @player1
       begin 
         board_array = @game_turn.execute(current_player.marker)

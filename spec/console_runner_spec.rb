@@ -32,6 +32,10 @@ module TicTacToe
 
         allow_any_instance_of(Game).to receive(:players_turns).and_return(completed_game_board)
 
+        allow_any_instance_of(Game).to receive(:player1).and_return(Player.new(marker1))
+
+        allow_any_instance_of(Game).to receive(:player2).and_return(Player.new(marker2))
+
         expect(game_completion).to receive(:game_over_messages)
 
         console_runner = ConsoleRunner.new(marker_loop, game_completion, mock_console_ui, game_type)
