@@ -20,8 +20,8 @@ module TicTacToe
 
     describe ".execute" do 
       before(:each) do 
-        allow(mock_console_ui).to receive(:display_board)
         allow(mock_console_ui).to receive(:move_messages)
+        allow(mock_console_ui).to receive(:move_selection_message)
       end
 
       context "the game is a space away from being won" do
@@ -44,7 +44,9 @@ module TicTacToe
                   :validation => validation
                 })
 
-              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, marker).and_return(move)
+              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, marker)
+
+              allow(mock_console_ui).to receive(:user_input).and_return(move)
 
               validate_move(game_turn, move)
 
@@ -74,6 +76,8 @@ module TicTacToe
               :console_ui => mock_console_ui, 
               :validation => validation
             })
+        
+          allow(mock_console_ui).to receive(:user_input).and_return(move) 
           
           validate_move(game_turn, move)
          
@@ -102,6 +106,8 @@ module TicTacToe
               :console_ui => mock_console_ui, 
               :validation => validation
             })
+
+          allow(mock_console_ui).to receive(:user_input).and_return(move)
           
           validate_move(game_turn, move)
 
@@ -127,6 +133,8 @@ module TicTacToe
                   :validation => validation
                 })
 
+              allow(mock_console_ui).to receive(:user_input).and_return(move)
+
               validate_move(game_turn, move)
 
               result = game_turn.execute(marker)
@@ -148,13 +156,9 @@ module TicTacToe
               "6", "X", "X"
             ])
 
-            move = first_move 
-            
-            until validation.move_valid?(board.nine_space_array, move)
-              expect(mock_console_ui).to receive(:valid_move_message)
-              expect(mock_console_ui).to receive(:user_input).and_return(second_move)
-              move = second_move
-            end
+            expect(mock_console_ui).to receive(:user_input).and_return(first_move, second_move)
+
+            expect(mock_console_ui).to receive(:valid_move_message).exactly(1).times
 
             game_turn = GameTurn.new(
               { :board => board, 

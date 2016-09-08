@@ -27,7 +27,7 @@ module TicTacToe
       @wrapper.puts_string(" #{board[0]} | #{board[1]} | #{board[2]} \n===+===+===\n #{board[3]} | #{board[4]} | #{board[5]} \n===+===+===\n #{board[6]} | #{board[7]} | #{board[8]} \n")
     end
 
-    def player_move_message
+    def move_selection_message
       @wrapper.puts_string("Please select your move by entering a number 0 to 8")
     end
 
@@ -40,10 +40,6 @@ module TicTacToe
       puts_space
       display_board(board)
       puts_space
-      player_move_message
-      move = user_input
-      puts_space
-      move
     end
 
     def valid_move_message

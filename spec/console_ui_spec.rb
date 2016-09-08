@@ -52,10 +52,10 @@ module TicTacToe
       end
     end
 
-    describe ".player_move_message" do 
+    describe ".move_selection_message" do 
       it "prompts the user for their move on the board" do 
         expect(mock_wrapper).to receive(:puts_string).with("Please select your move by entering a number 0 to 8").exactly(1).times
-        console_ui.player_move_message
+        console_ui.move_selection_message
       end 
     end
 
@@ -72,8 +72,6 @@ module TicTacToe
 
     describe ".move_messages" do 
       context "it is player 1's turn and their marker is 'O' " do 
-        
-        player_num = 1
         marker = 'O'
 
         it "displays the appropiate messages for a user's turn" do 
@@ -87,13 +85,8 @@ module TicTacToe
 
           expect(console_ui).to receive(:display_board).with(board)
           
-          expect(console_ui).to receive(:puts_space).exactly(3).times
-
-          expect(console_ui).to receive(:player_move_message)
-
-          expect(console_ui).to receive(:user_input).and_return("5")
-
-          expect(console_ui.move_messages(board, marker)).to eq('5')
+          expect(console_ui).to receive(:puts_space).exactly(2).times
+          console_ui.move_messages(board, marker)
         end
       end
     end    
