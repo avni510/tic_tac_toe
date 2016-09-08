@@ -18,8 +18,8 @@ module TicTacToe
         player_setup = PlayerSetup.new
 
         player_setup.player_assignment(marker1, marker2, args)
-        expect(player_setup.player1).to be_a_kind_of(Human)
-        expect(player_setup.player2).to be_a_kind_of(Human)
+        expect(player_setup.p1).to be_a_kind_of(Human)
+        expect(player_setup.p2).to be_a_kind_of(Human)
       end
     end
   end

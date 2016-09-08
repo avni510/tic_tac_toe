@@ -25,7 +25,7 @@ module TicTacToe
             "3", "4", "5", 
             "6", "7", "8"
           ]  
-          expect(board.fill(position, marker)).to eq(grid)
+          expect(board.fill(position, marker)).to be_a_kind_of(Board)
         end
       end
     end

@@ -6,11 +6,11 @@ module TicTacToe
       @marker_loop = marker_loop
       @game_completion = game_completion
       @game_type = game_type
-      params = {
+      @params = {
         :console_ui => console_ui,
         :validation => Validation.new
       }
-      @game_turn = GameTurn.new(params)
+      @player_setup = PlayerSetup.new
       @game_eval = GameEval.new
     end
 
@@ -19,11 +19,16 @@ module TicTacToe
 
       marker1, marker2 = @marker_loop.marker_selection(TTT_MARKER1, TTT_MARKER2)
 
-      game = Game.new(@game_turn, @game_eval, @game_type)
+      @player_setup.player_assignment(marker1, marker2, @params)
 
-      completed_game_board = game.players_turns(marker1, marker2)
+      player1 = @player_setup.p1
+      player2 = @player_setup.p2
 
-      @game_completion.game_over_messages(completed_game_board, game.player1.marker, game.player2.marker)
+      game = Game.new(@game_eval,@game_type, player1, player2)
+
+      completed_game_board = game.players_turns
+
+      @game_completion.game_over_messages(completed_game_board, player1.marker, player2.marker)
     end
   end
 end

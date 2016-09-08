@@ -9,7 +9,7 @@ module TicTacToe
 
     def fill(position, marker)
       @nine_space_array[position.to_i] = marker
-      @nine_space_array
+      self
     end
   end
 end

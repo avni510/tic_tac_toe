@@ -12,7 +12,7 @@ module TicTacToe
       tied?(board, marker1, marker2) || won?(board)
     end
     
-  private
+    private
 
     def tied?(board, marker1, marker2)
       board.all?{ |space| space == marker1 || space == marker2}

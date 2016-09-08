@@ -43,11 +43,12 @@ module TicTacToe
           context "space #{move} is the winning move" do 
             it "returns the winning board" do 
 
-              board = create_board([
-              "O", "O", "2",
-              "3", "X", "5",
-              "X", "O", "X"
-              ])
+              board = create_board(
+                [
+                  "O", "O", "2",
+                  "3", "X", "5",
+                  "X", "O", "X"
+                ])
 
               human = Human.new(marker, 
                 { :board => board, 
@@ -63,8 +64,8 @@ module TicTacToe
 
               board.fill(move, human.marker)
 
-              result = human.make_move
-              expect(result).to eq(board.nine_space_array)
+              result = human.make_move(board)
+              expect(result).to be_a_kind_of(Board)
             end
           end
         end
@@ -93,9 +94,9 @@ module TicTacToe
           validate_move(human, move)
          
           board.fill(move, human.marker)
-          
-          result = human.make_move
-          expect(result).to eq(board.nine_space_array)
+
+          result = human.make_move(board)
+          expect(result).to be_a_kind_of(Board)
         end
       end
 
@@ -122,8 +123,8 @@ module TicTacToe
           
           validate_move(human, move)
 
-          result = human.make_move
-          expect(result).to eq(board.nine_space_array)
+          result = human.make_move(board)
+          expect(result).to be_a_kind_of(Board)
         end
 
         context "player 1 is 'O' the first game and 'X' the second game" do
@@ -148,8 +149,8 @@ module TicTacToe
 
               validate_move(human, move)
 
-              result = human.make_move
-              expect(result).to eq(board.nine_space_array)
+              result = human.make_move(board)
+              expect(result).to be_a_kind_of(Board)
             end
           end
         end
@@ -177,7 +178,7 @@ module TicTacToe
                 :validation => validation
               })
 
-            human.make_move
+            human.make_move(board)
           end
         end
       end
