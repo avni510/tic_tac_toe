@@ -1,3 +1,4 @@
+require 'pry'
 module TicTacToe
   require 'spec_helper'
 
@@ -8,6 +9,8 @@ module TicTacToe
     let(:mock_console_ui) { double }
 
     let(:game_type) { double }
+
+    let(:player_setup) { PlayerSetup.new }
 
       context "player 2 wins the game" do
         def create_board(spaces)
@@ -21,7 +24,7 @@ module TicTacToe
         it "executes each player's turn until the game is over" do
           p1_marker, p2_marker = 'X', 'O'
 
-          board = create_board(
+          initial_board = create_board(
             [ 
               "X", "O", "X",
               "3", "O", "X", 
@@ -30,23 +33,19 @@ module TicTacToe
 
           args = 
             {
-              :board => board, 
+              :board => initial_board, 
               :console_ui => mock_console_ui,
               :validation => Validation.new
             }
-          
-          player_setup = PlayerSetup.new
 
+          game = Game.new(game_eval, player_setup, args, game_type)
+          
           allow(game_type).to receive(:human_v_human).and_return(false)
 
           allow(game_type).to receive(:human_v_simp_comp).and_return(true)
 
-          player_setup.player_assignment(p1_marker, p2_marker, args, game_type)
-
-          player1 = player_setup.p1
-          player2 = player_setup.p2
-
-          game = Game.new(game_eval, player1, player2)
+          player1 = double
+          player2 = double
 
           board_after_player1_move = create_board(
             [ 
@@ -55,7 +54,7 @@ module TicTacToe
               "X", "7", "8"
             ])
 
-          expect(player1).to receive(:make_move).and_return(board_after_player1_move)
+          allow(player1).to receive(:make_move).with(initial_board).and_return(board_after_player1_move)
 
           board_after_player2_move = create_board(
             [ 
@@ -64,11 +63,16 @@ module TicTacToe
               "X", "O", "8"
             ])
 
-          expect(player2).to receive(:make_move).and_return(board_after_player2_move)
+          allow(player2).to receive(:make_move).with(board_after_player1_move).and_return(board_after_player2_move)
 
-          result = game.players_turns
+
+          game.instance_variable_set(:@player1, player1)
+
+          game.instance_variable_set(:@player2, player2)
+
+          result = game.players_turns(p1_marker, p2_marker)
+
           expect(result).to eq(board_after_player2_move.nine_space_array)
-
       end
     end
   end
