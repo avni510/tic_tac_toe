@@ -19,12 +19,12 @@ module TicTacToe
 
       marker1, marker2 = @marker_loop.marker_selection(TTT_MARKER1, TTT_MARKER2)
 
-      @player_setup.player_assignment(marker1, marker2, @params)
+      @player_setup.player_assignment(marker1, marker2, @params, @game_type)
 
       player1 = @player_setup.p1
       player2 = @player_setup.p2
 
-      game = Game.new(@game_eval,@game_type, player1, player2)
+      game = Game.new(@game_eval, player1, player2)
 
       completed_game_board = game.players_turns
 

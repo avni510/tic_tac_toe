@@ -22,7 +22,7 @@ module TicTacToe
 
         game_completion = GameCompletion.new(mock_console_ui, game_eval)
 
-        game_type = GameType.new(mock_console_ui)
+        game_type = double
 
         marker1, marker2 = 'X', 'O'
 
@@ -33,7 +33,7 @@ module TicTacToe
             "6", "7", "8"
           ])
 
-        expect(game_type).to receive(:game_menu)
+        allow(game_type).to receive(:game_menu)
 
         allow(game_type).to receive(:human_v_human).and_return(true)
 
@@ -48,7 +48,9 @@ module TicTacToe
           }
         
         player_setup = PlayerSetup.new
-        player_setup.player_assignment(marker1, marker2, args)
+
+        allow(game_type).to receive(:human_v_human).and_return(true)
+        player_setup.player_assignment(marker1, marker2, args, game_type)
 
         player1 = player_setup.p1
         player2 = player_setup.p2

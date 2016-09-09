@@ -5,9 +5,9 @@ module TicTacToe
 
     let(:game_eval) { GameEval.new }
 
-    let(:game_type) {GameType.new(mock_console_ui) }
-
     let(:mock_console_ui) { double }
+
+    let(:game_type) { double }
 
       context "player 2 wins the game" do
         def create_board(spaces)
@@ -36,12 +36,17 @@ module TicTacToe
             }
           
           player_setup = PlayerSetup.new
-          player_setup.player_assignment(p1_marker, p2_marker, args)
+
+          allow(game_type).to receive(:human_v_human).and_return(false)
+
+          allow(game_type).to receive(:human_v_simp_comp).and_return(true)
+
+          player_setup.player_assignment(p1_marker, p2_marker, args, game_type)
 
           player1 = player_setup.p1
           player2 = player_setup.p2
 
-          game = Game.new(game_eval, game_type, player1, player2)
+          game = Game.new(game_eval, player1, player2)
 
           board_after_player1_move = create_board(
             [ 

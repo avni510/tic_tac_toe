@@ -2,9 +2,8 @@ module TicTacToe
   
   class Game 
 
-    def initialize(game_eval, game_type, player1, player2)
+    def initialize(game_eval, player1, player2)
       @game_eval = game_eval
-      @game_type = game_type
       @player1 = player1
       @player2 = player2
     end
