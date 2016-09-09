@@ -1,4 +1,3 @@
-require 'pry'
 module TicTacToe
   require 'spec_helper'
 
@@ -33,7 +32,6 @@ module TicTacToe
 
           args = 
             {
-              :board => initial_board, 
               :console_ui => mock_console_ui,
               :validation => Validation.new
             }
@@ -65,12 +63,11 @@ module TicTacToe
 
           allow(player2).to receive(:make_move).with(board_after_player1_move).and_return(board_after_player2_move)
 
-
           game.instance_variable_set(:@player1, player1)
 
           game.instance_variable_set(:@player2, player2)
 
-          result = game.players_turns(p1_marker, p2_marker)
+          result = game.players_turns(p1_marker, p2_marker, initial_board)
 
           expect(result).to eq(board_after_player2_move.nine_space_array)
       end

@@ -9,7 +9,6 @@ module TicTacToe
     before (:each) do 
       @args = 
         {
-          :board => Board.new, 
           :console_ui => mock_console_ui,
           :validation => Validation.new
         }

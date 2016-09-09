@@ -8,7 +8,6 @@ module TicTacToe
     it "returns the player's marker" do
       args = 
         {
-          :board => Board.new, 
           :console_ui => mock_console_ui, 
           :validation => validation
         }
@@ -50,7 +49,7 @@ module TicTacToe
                 ])
 
               human = Human.new(marker, 
-                { :board => board_before_player_move, 
+                { 
                   :console_ui => mock_console_ui, 
                   :validation => validation
                 })
@@ -94,7 +93,7 @@ module TicTacToe
           ])
           
           human = Human.new(marker,
-            { :board => board_before_player_move, 
+            { 
               :console_ui => mock_console_ui, 
               :validation => validation
             })
@@ -135,7 +134,7 @@ module TicTacToe
               ])
 
               human = Human.new(marker, 
-                { :board => board_before_player_move,
+                { 
                   :console_ui => mock_console_ui, 
                   :validation => validation
                 })
@@ -177,7 +176,7 @@ module TicTacToe
             expect(mock_console_ui).to receive(:valid_move_message).exactly(1).times
 
             human = Human.new(marker,
-              { :board => board, 
+              {  
                 :console_ui => mock_console_ui, 
                 :validation => validation
               })
