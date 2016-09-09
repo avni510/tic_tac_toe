@@ -150,5 +150,13 @@ module TicTacToe
         console_ui.valid_menu_choice
       end
     end
+
+    describe ".computer_move_message" do
+      it "prints a message to the console of where the computer will move" do
+        expect(mock_wrapper).to receive(:puts_string).with("The computer will fill space 6")
+        expect(console_ui).to receive(:puts_space)
+        console_ui.computer_move_message('6')
+      end
+    end
   end
 end

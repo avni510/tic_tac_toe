@@ -75,6 +75,11 @@ module TicTacToe
     def valid_menu_choice
       @wrapper.puts_string("Please enter a valid menu option")
     end
+
+    def computer_move_message(move)
+      @wrapper.puts_string("The computer will fill space #{move}")
+      puts_space
+    end
   end
 end
 
