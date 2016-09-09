@@ -37,6 +37,5 @@ module TicTacToe
         @human_v_simp_comp = true
       end
     end
-
   end
 end

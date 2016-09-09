@@ -61,17 +61,14 @@ module TicTacToe
 
 
     describe ".player_turn_message" do 
-      context "it is Player 1's turn and they have 'X' as their marker" do 
-        it "displays which player's turn it is and which marker they have" do
-      
-          expect(mock_wrapper).to receive(:puts_string).with("It is Player X's turn")
-          console_ui.player_turn_message('X')
-        end
+      it "displays which player's turn it is and which marker they have" do
+        expect(mock_wrapper).to receive(:puts_string).with("It is Player X's turn")
+        console_ui.player_turn_message('X')
       end
     end
 
     describe ".move_messages" do 
-      context "it is player 1's turn and their marker is 'O' " do 
+      context "It is Player O's turn" do 
         marker = 'O'
 
         it "displays the appropiate messages for a user's turn" do 

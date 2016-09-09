@@ -15,7 +15,7 @@ module TicTacToe
     end
 
     before(:each) do
-      allow(mock_console_ui).to receive(:move_messages).with(any_args)
+      allow(mock_console_ui).to receive(:move_messages)
       allow(mock_console_ui).to receive(:computer_move_message)
     end
 
@@ -46,8 +46,9 @@ module TicTacToe
           expect(result).to be_a_kind_of(Board)
         end
       end
-
+#
 #      context "the move the computer selects is not open" do
+#
 #        it "selects another move" do
 #          current_board = create_board(
 #            [ 
@@ -59,14 +60,14 @@ module TicTacToe
 #          args = 
 #            {
 #              :board => current_board,
-#              :console_ui => double, 
+#              :console_ui => mock_console_ui,
 #              :validation => Validation.new
 #            }
-#
-#
+#            j
 #          computer = Computer.new('X', args)
 #
-#          allow(Kernel).to receive(:rand).and_return(0)
+##          allow(Kernel).to receive(:rand).and_return(0)
+#
 #
 #          result = computer.make_move(computer.board)
 #

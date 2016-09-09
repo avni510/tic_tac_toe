@@ -11,12 +11,13 @@ module TicTacToe
     end
 
     it "sets @human_v_human to true if 1 is entered" do
-      allow(mock_console_ui).to receive(:user_input).and_return('1')
+      expect(mock_console_ui).to receive(:user_input).and_return('1')
       game_type.game_menu
       expect(game_type.human_v_human).to eq(true)
     end
 
     it "sets @human_v_simp_comp to true if 2 is entered" do
+      expect(mock_console_ui).to receive(:user_input).and_return('2')
       game_type.game_menu
       expect(game_type.human_v_simp_comp).to eq(true)
     end

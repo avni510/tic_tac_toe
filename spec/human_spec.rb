@@ -4,12 +4,11 @@ module TicTacToe
   describe Human do 
     let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
-    let(:board) {Board.new}
 
     it "returns the player's marker" do
       args = 
         {
-          :board => board, 
+          :board => Board.new, 
           :console_ui => mock_console_ui, 
           :validation => validation
         }
@@ -43,7 +42,7 @@ module TicTacToe
           context "space #{move} is the winning move" do 
             it "returns the winning board" do 
 
-              board = create_board(
+              board_before_player_move = create_board(
                 [
                   "O", "O", "2",
                   "3", "X", "5",
@@ -51,21 +50,32 @@ module TicTacToe
                 ])
 
               human = Human.new(marker, 
-                { :board => board, 
+                { :board => board_before_player_move, 
                   :console_ui => mock_console_ui, 
                   :validation => validation
                 })
 
-              allow(mock_console_ui).to receive(:move_messages).with(board.nine_space_array, marker)
+              board_before_player_move_array = board_before_player_move.nine_space_array
+
+              allow(mock_console_ui).to receive(:move_messages).with(board_before_player_move_array, marker)
 
               allow(mock_console_ui).to receive(:user_input).and_return(move)
 
               validate_move(human, move)
 
-              board.fill(move, human.marker)
+              board_before_player_move.fill(move, human.marker)
 
-              result = human.make_move(board)
-              expect(result).to be_a_kind_of(Board)
+              board_after_player_move = create_board(
+                [
+                  "O", "O", "#{marker}",
+                  "3", "X", "5",
+                  "X", "O", "X"
+                ])
+              board_after_player_move_array = board_after_player_move.nine_space_array
+
+              result = human.make_move(board_before_player_move)
+              
+              expect(result.nine_space_array).to eq(board_after_player_move_array)
             end
           end
         end
@@ -77,14 +87,14 @@ module TicTacToe
         marker = 'X'
 
         it 'returns the tied board' do         
-          board = create_board([
+          board_before_player_move = create_board([
             "O", "1", "X", 
             "X", "O", "O", 
             "O", "X", "X"
           ])
           
           human = Human.new(marker,
-            { :board => board, 
+            { :board => board_before_player_move, 
               :console_ui => mock_console_ui, 
               :validation => validation
             })
@@ -93,39 +103,24 @@ module TicTacToe
           
           validate_move(human, move)
          
-          board.fill(move, human.marker)
+          board_before_player_move.fill(move, human.marker)
+          
+          board_after_player_move = create_board(
+            [
+              "O", "#{marker}", "X", 
+              "X", "O", "O", 
+              "O", "X", "X"
+            ])
 
-          result = human.make_move(board)
-          expect(result).to be_a_kind_of(Board)
+          board_after_player_move_array = board_after_player_move.nine_space_array
+
+          result = human.make_move(board_before_player_move)
+
+          expect(result.nine_space_array).to eq(board_after_player_move_array)
         end
       end
 
       context 'the game is neither won or tied' do 
-
-        marker = 'X'
-        
-        it 'returns the board if the game is neither won or tied' do 
-          move = '7'
-          
-          board = create_board([
-             "X", "1", "2", 
-             "3", "4", "5", 
-             "6", "7", "O"
-            ])
-
-          human = Human.new(marker,
-            { :board => board, 
-              :console_ui => mock_console_ui, 
-              :validation => validation
-            })
-
-          allow(mock_console_ui).to receive(:user_input).and_return(move)
-          
-          validate_move(human, move)
-
-          result = human.make_move(board)
-          expect(result).to be_a_kind_of(Board)
-        end
 
         context "player 1 is 'O' the first game and 'X' the second game" do
           it "fills the board with the user's move and marker" do 
@@ -133,14 +128,14 @@ module TicTacToe
             
               move = '1'
 
-              board = create_board([
+              board_before_player_move  = create_board([
                 "X", "1", "O",
                 "O", "O", "5",
                 "6", "X", "X"
               ])
 
               human = Human.new(marker, 
-                { :board => board, 
+                { :board => board_before_player_move,
                   :console_ui => mock_console_ui, 
                   :validation => validation
                 })
@@ -149,8 +144,17 @@ module TicTacToe
 
               validate_move(human, move)
 
-              result = human.make_move(board)
-              expect(result).to be_a_kind_of(Board)
+              board_after_player_move = create_board([
+                "X", "#{marker}", "O",
+                "O", "O", "5",
+                "6", "X", "X"
+              ])
+
+              board_after_player_move_array = board_after_player_move.nine_space_array
+
+              result = human.make_move(board_before_player_move)
+
+              expect(result.nine_space_array).to eq(board_after_player_move_array)
             end
           end
         end
