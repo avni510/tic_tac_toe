@@ -1,6 +1,4 @@
 module TicTacToe
-  require_relative 'player'
-
   class Human < Player
     attr_reader :marker
 

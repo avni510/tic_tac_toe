@@ -16,7 +16,6 @@ module TicTacToe
     end
 
     it "sets up the players of the game" do
-
       allow(@game_type).to receive(:human_v_human).and_return(false)
 
       allow(@game_type).to receive(:human_v_simp_comp).and_return(true)

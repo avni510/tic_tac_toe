@@ -1,5 +1,4 @@
 module TicTacToe
-
   class Board 
     attr_reader :cells
 

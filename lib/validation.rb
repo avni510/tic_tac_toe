@@ -10,7 +10,7 @@ module TicTacToe
       not marker !~ /^(X|O|x|o)$/
     end 
 
-  private 
+    private 
 
     def valid_position?(move)
       not move !~ /^[0-8]{1}$/ 

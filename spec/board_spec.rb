@@ -25,7 +25,6 @@ module TicTacToe
         "6", "7", "8"
       ])
 
-
       board_after_move = Board.new([
         "0", "1", "#{marker}", 
         "3", "4", "5", 

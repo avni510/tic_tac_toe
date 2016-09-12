@@ -15,7 +15,7 @@ module TicTacToe
     end
 
     describe ".make_move" do
-      context "the move the computer selects a move that is open" do
+      context "the computer selects a move that is open" do
         it "randomly selects a move and returns a board object" do
           initial_board = Board.new([ 
             "0", "1", "2",
@@ -29,8 +29,7 @@ module TicTacToe
         end
       end
 
-      context "the move the computer selects a move that is not open" do
-
+      context "the computer selects a move that is not open" do
         it "selects another move" do
           initial_board = Board.new(
             [ 
@@ -40,7 +39,6 @@ module TicTacToe
             ])
 
           allow(Random).to receive(:rand).and_return(0, 6)
-
 
           board_after_computer_move = Board.new(
             [ 
