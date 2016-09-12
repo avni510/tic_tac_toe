@@ -9,23 +9,27 @@ module TicTacToe
       @params = params
       @game_type = game_type
     end
-
-    def players_turns(marker1, marker2, board)
+    
+    def assign_players(marker1, marker2)
       @player_setup.player_assignment(marker1, marker2, @params, @game_type)
 
       @player1 = @player_setup.p1
       @player2 = @player_setup.p2
+    end
 
+    def players_turns(board)
       current_player = @player1
 
       begin 
         board = current_player.make_move(board)
         current_player = toggle_player(current_player)
-      end until @game_eval.game_over?(board.nine_space_array, marker1, marker2)
+      end until @game_eval.game_over?(board.nine_space_array, @player1.marker, @player2.marker)
 
       board.nine_space_array
     end
     
+    private
+
     def toggle_player(current_player)
       current_player == @player1 ? @player2 : @player1
     end

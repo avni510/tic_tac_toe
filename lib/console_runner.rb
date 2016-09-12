@@ -22,7 +22,9 @@ module TicTacToe
 
       game = Game.new(@game_eval, @player_setup, @params, @game_type)
 
-      completed_game_board = game.players_turns(marker1, marker2, @board)
+      game.assign_players(marker1, marker2)
+
+      completed_game_board = game.players_turns(@board)
 
       @game_completion.game_over_messages(completed_game_board, marker1, marker2)
     end
