@@ -1,7 +1,6 @@
 module TicTacToe
   class Player
     attr_reader :marker
-    attr_reader :board
 
     def initialize(marker, console_ui)
       @marker = marker

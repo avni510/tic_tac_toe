@@ -24,7 +24,7 @@ module TicTacToe
 
           marker1, marker2 = 'X', 'O'
 
-          winning_player_marker = game_eval.player_won(board_array, marker1, marker2)
+          winning_player_marker = game_eval.winning_player_marker(board_array, marker1, marker2)
 
           expect(mock_console_ui).to receive(:won_message).with("#{winning_player_marker}")
 
@@ -43,7 +43,7 @@ module TicTacToe
           
           marker1, marker2 = 'O', 'X'
 
-          game_result = game_eval.player_won(board_array, marker1, marker2)
+          game_result = game_eval.winning_player_marker(board_array, marker1, marker2)
 
           expect(mock_console_ui).to receive(:tied_message)
 

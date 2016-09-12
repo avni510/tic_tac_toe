@@ -9,9 +9,13 @@ module TicTacToe
     def game_over_messages(board_array, marker1, marker2)
       @console_ui.display_board(board_array)
       @console_ui.puts_space
-      winning_player_marker = @game_eval.player_won(board_array, marker1, marker2)
-      if winning_player_marker
-        @console_ui.won_message("#{winning_player_marker}")
+      winning_marker = @game_eval.winning_player_marker(board_array, marker1, marker2)
+      end_game_message(winning_marker)
+    end
+
+    def end_game_message(winning_marker)
+      if winning_marker
+        @console_ui.won_message("#{winning_marker}")
       else
         @console_ui.tied_message
       end

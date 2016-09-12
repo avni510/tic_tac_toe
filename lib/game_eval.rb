@@ -2,7 +2,7 @@ module TicTacToe
 
   class GameEval
 
-    def player_won(board, marker1, marker2)
+    def winning_player_marker(board, marker1, marker2)
       if won?(board)
         board.count(marker1) > board.count(marker2) ? marker1 : marker2
       end

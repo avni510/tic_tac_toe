@@ -1,5 +1,4 @@
 module TicTacToe
-
   class Board 
     attr_reader :cells
 
@@ -10,6 +9,10 @@ module TicTacToe
     def fill(position, marker)
       cells[position.to_i] = marker
       self
+    end
+
+    def size
+      self.cells.count
     end
   end
 end
