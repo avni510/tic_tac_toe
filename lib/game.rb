@@ -23,9 +23,9 @@ module TicTacToe
       begin 
         board = current_player.make_move(board)
         current_player = toggle_player(current_player)
-      end until @game_eval.game_over?(board.nine_space_array, @player1.marker, @player2.marker)
+      end until @game_eval.game_over?(board.cells, @player1.marker, @player2.marker)
 
-      board.nine_space_array
+      board.cells
     end
     
     private

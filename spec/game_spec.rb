@@ -29,23 +29,15 @@ module TicTacToe
     end
 
     context "player 'O' wins the game" do
-      def create_board(spaces)
-        board = Board.new
-        spaces.each_with_index do |marker, index|
-          board.fill(index, marker)
-        end
-        board
-      end
-
       it "executes each player's turn until the game is over" do
-        initial_board = create_board(
+        initial_board = Board.new(
           [ 
             "X", "O", "X",
             "3", "O", "X", 
             "6", "7", "8",
           ])
 
-        board_after_player1_move = create_board(
+        board_after_player1_move = Board.new(
           [ 
             "X", "O", "X",
             "3", "O", "X", 
@@ -58,7 +50,7 @@ module TicTacToe
 
         allow(@player2).to receive(:marker).and_return(@p2_marker).exactly(2).times
 
-        board_after_player2_move = create_board(
+        board_after_player2_move = Board.new(
           [ 
             "X", "O", "X",
             "3", "O", "X", 
@@ -69,7 +61,7 @@ module TicTacToe
 
         result = @game.players_turns(initial_board)
 
-        expect(result).to eq(board_after_player2_move.nine_space_array)
+        expect(result).to eq(board_after_player2_move.cells)
       end
     end
   end

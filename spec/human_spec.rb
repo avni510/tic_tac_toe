@@ -10,14 +10,6 @@ module TicTacToe
     end
     
    describe ".make_move" do
-      def create_board(spaces)
-        board = Board.new
-        spaces.each_with_index do |marker, index|
-          board.fill(index, marker)
-        end
-        board
-      end
-
       def validate_move(human, move)
         expect(human).to receive(:valid_move_loop).and_return(move)
       end
@@ -35,7 +27,7 @@ module TicTacToe
           context "space #{move} is the winning move" do 
             it "returns the winning board" do 
 
-              board_before_player_move = create_board(
+              board_before_player_move = Board.new(
                 [
                   "O", "O", "2",
                   "3", "X", "5",
@@ -44,7 +36,7 @@ module TicTacToe
 
               human = Human.new(marker, mock_console_ui) 
 
-              board_before_player_move_array = board_before_player_move.nine_space_array
+              board_before_player_move_array = board_before_player_move.cells
 
               allow(mock_console_ui).to receive(:move_messages).with(board_before_player_move_array, marker)
 
@@ -54,18 +46,18 @@ module TicTacToe
 
               board_before_player_move.fill(move, human.marker)
 
-              board_after_player_move = create_board(
+              board_after_player_move = Board.new(
                 [
                   "O", "O", "#{marker}",
                   "3", "X", "5",
                   "X", "O", "X"
                 ])
 
-              board_after_player_move_array = board_after_player_move.nine_space_array
+              board_after_player_move_array = board_after_player_move.cells
 
               result = human.make_move(board_before_player_move)
               
-              expect(result.nine_space_array).to eq(board_after_player_move_array)
+              expect(result.cells).to eq(board_after_player_move_array)
             end
           end
         end
@@ -77,7 +69,7 @@ module TicTacToe
         marker = 'X'
 
         it 'returns the tied board' do         
-          board_before_player_move = create_board([
+          board_before_player_move = Board.new([
             "O", "1", "X", 
             "X", "O", "O", 
             "O", "X", "X"
@@ -91,18 +83,18 @@ module TicTacToe
          
           board_before_player_move.fill(move, human.marker)
           
-          board_after_player_move = create_board(
+          board_after_player_move = Board.new(
             [
               "O", "#{marker}", "X", 
               "X", "O", "O", 
               "O", "X", "X"
             ])
 
-          board_after_player_move_array = board_after_player_move.nine_space_array
+          board_after_player_move_array = board_after_player_move.cells
 
           result = human.make_move(board_before_player_move)
 
-          expect(result.nine_space_array).to eq(board_after_player_move_array)
+          expect(result.cells).to eq(board_after_player_move_array)
         end
       end
 
@@ -114,7 +106,7 @@ module TicTacToe
             
               move = '1'
 
-              board_before_player_move  = create_board([
+              board_before_player_move  = Board.new([
                 "X", "1", "O",
                 "O", "O", "5",
                 "6", "X", "X"
@@ -126,17 +118,17 @@ module TicTacToe
 
               validate_move(human, move)
 
-              board_after_player_move = create_board([
+              board_after_player_move = Board.new([
                 "X", "#{marker}", "O",
                 "O", "O", "5",
                 "6", "X", "X"
               ])
 
-              board_after_player_move_array = board_after_player_move.nine_space_array
+              board_after_player_move_array = board_after_player_move.cells
 
               result = human.make_move(board_before_player_move)
 
-              expect(result.nine_space_array).to eq(board_after_player_move_array)
+              expect(result.cells).to eq(board_after_player_move_array)
             end
           end
         end
@@ -147,7 +139,7 @@ module TicTacToe
           second_move = "2"
 
           it 'prompts the user to enter their move again' do 
-            board = create_board([
+            board = Board.new([
               "X", "1", "2",
               "O", "O", "5",
               "6", "X", "X"

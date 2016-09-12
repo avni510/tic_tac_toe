@@ -1,14 +1,14 @@
 module TicTacToe
 
   class Board 
-    attr_reader :nine_space_array
+    attr_reader :cells
 
-    def initialize 
-      @nine_space_array = [*'0'..'8']
+    def initialize(cells = [*'0'..'8'])
+      @cells = cells
     end
 
     def fill(position, marker)
-      @nine_space_array[position.to_i] = marker
+      cells[position.to_i] = marker
       self
     end
   end

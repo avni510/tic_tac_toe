@@ -4,14 +4,6 @@ module TicTacToe
   describe Computer do
     let(:mock_console_ui) { double }
 
-    def create_board(spaces)
-      board = Board.new
-      spaces.each_with_index do |marker, index|
-        board.fill(index, marker)
-      end
-      board
-    end
-
     before(:each) do
       allow(mock_console_ui).to receive(:move_messages)
       allow(mock_console_ui).to receive(:computer_move_message)
@@ -25,7 +17,7 @@ module TicTacToe
     describe ".make_move" do
       context "the move the computer selects a move that is open" do
         it "randomly selects a move and returns a board object" do
-          initial_board = create_board([ 
+          initial_board = Board.new([ 
             "0", "1", "2",
             "3", "4", "5", 
             "6", "7", "8"
@@ -40,7 +32,7 @@ module TicTacToe
       context "the move the computer selects a move that is not open" do
 
         it "selects another move" do
-          initial_board = create_board(
+          initial_board = Board.new(
             [ 
               "X", "O", "X",
               "3", "O", "X", 
@@ -50,7 +42,7 @@ module TicTacToe
           allow(Random).to receive(:rand).and_return(0, 6)
 
 
-          board_after_computer_move = create_board(
+          board_after_computer_move = Board.new(
             [ 
               "X", "O", "X",
               "3", "O", "X", 
@@ -59,9 +51,9 @@ module TicTacToe
 
           result_board = @computer.make_move(initial_board)
 
-          result_array = result_board.nine_space_array
+          result_array = result_board.cells
           
-          board_after_computer_move_array = board_after_computer_move.nine_space_array
+          board_after_computer_move_array = board_after_computer_move.cells
 
           expect(result_array).to eq(board_after_computer_move_array)
         end

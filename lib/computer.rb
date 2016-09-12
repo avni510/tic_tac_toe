@@ -3,7 +3,7 @@ module TicTacToe
     attr_reader :marker
 
     def make_move(board)
-      @console_ui.move_messages(board.nine_space_array, @marker)
+      @console_ui.move_messages(board.cells, @marker)
       move = valid_move_loop(board)
       board = board.fill(move, @marker)
       @console_ui.computer_move_message(move)
@@ -16,7 +16,7 @@ module TicTacToe
       begin 
         move = random_move(board)
         move = move.to_s
-      end until @validation.move_valid?(board.nine_space_array, move)  
+      end until @validation.move_valid?(board.cells, move)  
       move
     end
 
@@ -26,7 +26,7 @@ module TicTacToe
     end
 
     def board_size(board)
-      board.nine_space_array.count
+      board.cells.count
     end
   end
 end
