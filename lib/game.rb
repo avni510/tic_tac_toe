@@ -3,15 +3,15 @@ module TicTacToe
     attr_reader :player1
     attr_reader :player2
 
-    def initialize(game_eval, player_setup, params, game_type)
+    def initialize(game_eval, player_setup, console_ui, game_type)
       @game_eval = game_eval
       @player_setup = player_setup
-      @params = params
+      @console_ui = console_ui
       @game_type = game_type
     end
     
     def assign_players(marker1, marker2)
-      @player_setup.player_assignment(marker1, marker2, @params, @game_type)
+      @player_setup.player_assignment(marker1, marker2, @console_ui, @game_type)
 
       @player1 = @player_setup.p1
       @player2 = @player_setup.p2

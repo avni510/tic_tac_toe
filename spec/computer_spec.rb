@@ -2,7 +2,6 @@ module TicTacToe
   require "spec_helper"
   
   describe Computer do
-    let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
     def create_board(spaces)
@@ -16,38 +15,23 @@ module TicTacToe
     before(:each) do
       allow(mock_console_ui).to receive(:move_messages)
       allow(mock_console_ui).to receive(:computer_move_message)
+      @computer = Computer.new('X', mock_console_ui)
     end
 
     it "returns the player's marker" do
-      args = 
-        {
-          :console_ui => mock_console_ui,
-          :validation => validation
-        }
-      computer = Computer.new('X', args)
-      expect(computer.marker).to eq('X')
+      expect(@computer.marker).to eq('X')
     end
 
     describe ".make_move" do
       context "the move the computer selects a move that is open" do
         it "randomly selects a move and returns a board object" do
-          args = 
-            {
-              :console_ui => mock_console_ui,
-              :validation => validation
-            }
-
           initial_board = create_board([ 
             "0", "1", "2",
             "3", "4", "5", 
             "6", "7", "8"
           ])
-
-          computer = Computer.new('X', args)
-
-          computer.make_move(initial_board)
           
-          result = computer.make_move(initial_board)
+          result = @computer.make_move(initial_board)
 
           expect(result).to be_a_kind_of(Board)
         end
@@ -63,17 +47,8 @@ module TicTacToe
               "6", "7", "8",
             ])
 
-          args = 
-            {
-              :console_ui => mock_console_ui,
-              :validation => Validation.new
-            }
-
-          computer = Computer.new('X', args)
-
           allow(Random).to receive(:rand).and_return(0, 6)
 
-          result = computer.make_move(initial_board)
 
           board_after_computer_move = create_board(
             [ 
@@ -82,7 +57,13 @@ module TicTacToe
               "X", "7", "8",
             ])
 
-          expect(result).to be_a_kind_of(Board)
+          result_board = @computer.make_move(initial_board)
+
+          result_array = result_board.nine_space_array
+          
+          board_after_computer_move_array = board_after_computer_move.nine_space_array
+
+          expect(result_array).to eq(board_after_computer_move_array)
         end
       end
     end

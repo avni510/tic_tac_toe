@@ -2,16 +2,10 @@ module TicTacToe
   require 'spec_helper'
 
   describe Human do 
-    let(:validation) { Validation.new }
     let(:mock_console_ui) { double }
 
     it "returns the player's marker" do
-      args = 
-        {
-          :console_ui => mock_console_ui, 
-          :validation => validation
-        }
-      human = Human.new('O', args)
+      human = Human.new('O', mock_console_ui)
       expect(human.marker).to eq('O')
     end
     
@@ -48,11 +42,7 @@ module TicTacToe
                   "X", "O", "X"
                 ])
 
-              human = Human.new(marker, 
-                { 
-                  :console_ui => mock_console_ui, 
-                  :validation => validation
-                })
+              human = Human.new(marker, mock_console_ui) 
 
               board_before_player_move_array = board_before_player_move.nine_space_array
 
@@ -70,6 +60,7 @@ module TicTacToe
                   "3", "X", "5",
                   "X", "O", "X"
                 ])
+
               board_after_player_move_array = board_after_player_move.nine_space_array
 
               result = human.make_move(board_before_player_move)
@@ -92,11 +83,7 @@ module TicTacToe
             "O", "X", "X"
           ])
           
-          human = Human.new(marker,
-            { 
-              :console_ui => mock_console_ui, 
-              :validation => validation
-            })
+          human = Human.new(marker, mock_console_ui)
         
           allow(mock_console_ui).to receive(:user_input).and_return(move) 
           
@@ -133,11 +120,7 @@ module TicTacToe
                 "6", "X", "X"
               ])
 
-              human = Human.new(marker, 
-                { 
-                  :console_ui => mock_console_ui, 
-                  :validation => validation
-                })
+              human = Human.new(marker, mock_console_ui)
 
               allow(mock_console_ui).to receive(:user_input).and_return(move)
 
@@ -159,7 +142,6 @@ module TicTacToe
         end
 
         context 'an invalid position is entered' do 
-          player_num = 2
           marker = 'O'
           first_move = "0"
           second_move = "2"
@@ -175,11 +157,7 @@ module TicTacToe
 
             expect(mock_console_ui).to receive(:valid_move_message).exactly(1).times
 
-            human = Human.new(marker,
-              {  
-                :console_ui => mock_console_ui, 
-                :validation => validation
-              })
+            human = Human.new(marker, mock_console_ui)
 
             human.make_move(board)
           end

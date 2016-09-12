@@ -3,10 +3,10 @@ module TicTacToe
     attr_reader :marker
     attr_reader :board
 
-    def initialize(marker, args)
+    def initialize(marker, console_ui)
       @marker = marker
-      @console_ui = args[:console_ui]
-      @validation = args[:validation]
+      @console_ui = console_ui
+      @validation = Validation.new
     end
   end
 end

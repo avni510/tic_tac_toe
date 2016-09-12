@@ -6,16 +6,12 @@ module TicTacToe
     before(:all) do
       @p1_marker, @p2_marker = 'X', 'O'
 
-      args = 
-        {
-          :console_ui => double, 
-          :validation => Validation.new
-        }
+      mock_console_ui = double
       game_eval = GameEval.new
       player_setup = PlayerSetup.new
       @game_type = double
 
-      @game = Game.new(game_eval, player_setup, args, @game_type)
+      @game = Game.new(game_eval, player_setup, mock_console_ui, @game_type)
       @player1, @player2  = double, double
     end
 
