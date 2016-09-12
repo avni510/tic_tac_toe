@@ -44,6 +44,10 @@ module TicTacToe
 
           player1 = double
           player2 = double
+          
+          allow_any_instance_of(PlayerSetup).to receive(:p1).and_return(player1)
+
+          allow_any_instance_of(PlayerSetup).to receive(:p2).and_return(player2)
 
           board_after_player1_move = create_board(
             [ 
@@ -62,10 +66,6 @@ module TicTacToe
             ])
 
           allow(player2).to receive(:make_move).with(board_after_player1_move).and_return(board_after_player2_move)
-
-          game.instance_variable_set(:@player1, player1)
-
-          game.instance_variable_set(:@player2, player2)
 
           result = game.players_turns(p1_marker, p2_marker, initial_board)
 
