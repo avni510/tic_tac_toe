@@ -1,6 +1,5 @@
 module TicTacToe
   class Human < Player
-    attr_reader :marker
 
     def make_move(board)
       @console_ui.move_messages(board.cells, @marker)

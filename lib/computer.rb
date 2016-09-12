@@ -1,6 +1,5 @@
 module TicTacToe
   class Computer < Player
-    attr_reader :marker
 
     def make_move(board)
       @board = board
