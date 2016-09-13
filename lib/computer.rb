@@ -5,9 +5,8 @@ module TicTacToe
       @board = board
       @console_ui.move_messages(@board.cells, @marker)
       move = valid_move_loop
-      @board = @board.fill(move, @marker)
       @console_ui.computer_move_message(move)
-      @board
+      @board.fill(move, @marker)
     end
 
     private

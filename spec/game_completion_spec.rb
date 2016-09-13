@@ -29,7 +29,7 @@ module TicTacToe
           expect(mock_console_ui).to receive(:won_message).with("#{winning_player_marker}")
 
           game_completion.game_over_messages(board_array, marker1, marker2)
-        ens
+        end
       end
 
       context "the game ended in a tie" do 
