@@ -5,10 +5,7 @@ module TicTacToe
 
     def initialize(console_ui)
       @console_ui = console_ui
-      @menu_choices = {
-        '1' => '1. Human v. Human', 
-        '2' => '2. Human v. Simple Computer'
-      }
+      @menu_choices = game_options
     end
 
     def game_menu
@@ -19,6 +16,13 @@ module TicTacToe
     end
 
     private
+
+    def game_options
+      { 
+        '1' => '1. Human v. Human', 
+        '2' => '2. Human v. Simple Computer'
+      }
+    end
 
     def valid_game_menu_choice
       user_game_choice = @console_ui.user_input
