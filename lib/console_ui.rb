@@ -6,7 +6,9 @@ module TicTacToe
     end
 
     def user_input
-      @wrapper.get_action
+      input = @wrapper.get_action
+      puts_space
+      input
     end
 
     def select_marker_message
@@ -25,7 +27,7 @@ module TicTacToe
       @wrapper.puts_string(" #{board[0]} | #{board[1]} | #{board[2]} \n===+===+===\n #{board[3]} | #{board[4]} | #{board[5]} \n===+===+===\n #{board[6]} | #{board[7]} | #{board[8]} \n")
     end
 
-    def player_move_message
+    def move_selection_message
       @wrapper.puts_string("Please select your move by entering a number 0 to 8")
     end
 
@@ -38,10 +40,6 @@ module TicTacToe
       puts_space
       display_board(board)
       puts_space
-      player_move_message
-      move = user_input
-      puts_space
-      move
     end
 
     def valid_move_message
@@ -58,6 +56,29 @@ module TicTacToe
 
     def tied_message
       @wrapper.puts_string("The game ended in a tie")
+    end
+
+    def game_menu_messages
+      @wrapper.puts_string("Please select which type of game you would like to play")
+      puts_space
+      @wrapper.puts_string("Enter the number next to the choice")
+      puts_space
+    end
+
+    def display_game_menu(menu_options)
+      menu_options.each do |selection_num, game_type|
+        @wrapper.puts_string(game_type)
+      end
+      puts_space
+    end
+
+    def valid_menu_choice
+      @wrapper.puts_string("Please enter a valid menu option")
+    end
+
+    def computer_move_message(move)
+      @wrapper.puts_string("The computer will fill space #{move}")
+      puts_space
     end
   end
 end

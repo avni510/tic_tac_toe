@@ -1,24 +1,34 @@
 module TicTacToe
-
   class Game 
     attr_reader :player1
     attr_reader :player2
 
-    def initialize(game_turn, game_eval, p1_marker, p2_marker)
-      @game_turn = game_turn
+    def initialize(game_eval, player_setup, console_ui, game_type)
       @game_eval = game_eval
-      @player1 = Player.new(p1_marker)
-      @player2 = Player.new(p2_marker)
+      @player_setup = player_setup
+      @console_ui = console_ui
+      @game_type = game_type
+    end
+    
+    def assign_players(marker1, marker2)
+      @player_setup.player_assignment(marker1, marker2, @console_ui, @game_type)
+
+      @player1 = @player_setup.p1
+      @player2 = @player_setup.p2
     end
 
-    def players_turns
+    def players_turns(board)
       current_player = @player1
+
       begin 
-        board_array = @game_turn.execute(current_player.marker)
+        board = current_player.make_move(board)
         current_player = toggle_player(current_player)
-      end until @game_eval.game_over?(board_array, player1.marker, player2.marker)
-      board_array
+      end until @game_eval.game_over?(board.cells, @player1.marker, @player2.marker)
+
+      board.cells
     end
+    
+    private
 
     def toggle_player(current_player)
       current_player == @player1 ? @player2 : @player1

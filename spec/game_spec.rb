@@ -2,43 +2,65 @@ module TicTacToe
   require 'spec_helper'
 
   describe Game do 
-    params = {
-    :console_ui => ConsoleUI.new(WrapperIO.new),
-    :board => Board.new,
-    :validation => Validation.new
-    }
-    
-    let(:game_turn) { GameTurn.new(params) }
 
-    let(:game_eval) { GameEval.new }
+    before(:all) do
+      @p1_marker, @p2_marker = 'X', 'O'
 
-    describe ".players_turns" do 
-      context "player 2 wins the game" do 
-        it "executes each player's turn until the game is over" do 
-          p1_marker, p2_marker = 'X', 'O'
+      mock_console_ui = double
+      game_eval = GameEval.new
+      player_setup = PlayerSetup.new
+      @game_type = double
 
-          game = Game.new(game_turn, game_eval, p1_marker, p2_marker)
-          
-          player1, player2 = Player.new('X'), Player.new('O')
+      @game = Game.new(game_eval, player_setup, mock_console_ui, @game_type)
+      @player1, @player2  = double, double
+    end
 
-          expect(game_turn).to receive(:execute).with(player1.marker).and_return(
-            [ 
-              "X", "O", "X",
-              "3", "O", "X", 
-              "6", "7", "8",
-            ])
+    it "sets up the players of the game" do
+      allow(@game_type).to receive(:human_v_human).and_return(false)
 
-          winning_board = 
-            [ 
-              "X", "O", "X",
-              "3", "O", "X", 
-              "6", "O", "8"
-            ]
+      allow(@game_type).to receive(:human_v_simp_comp).and_return(true)
 
-          expect(game_turn).to receive(:execute).with(player2.marker).and_return(winning_board)
+      allow_any_instance_of(PlayerSetup).to receive(:p1).and_return(@player1)
 
-          game.players_turns
-        end
+      allow_any_instance_of(PlayerSetup).to receive(:p2).and_return(@player2)
+
+      @game.assign_players(@p1_marker, @p2_marker)
+    end
+
+    context "player 'O' wins the game" do
+      it "executes each player's turn until the game is over" do
+        initial_board = Board.new(
+          [ 
+            "X", "O", "X",
+            "3", "O", "X", 
+            "6", "7", "8",
+          ])
+
+        board_after_player1_move = Board.new(
+          [ 
+            "X", "O", "X",
+            "3", "O", "X", 
+            "X", "7", "8"
+          ])
+
+        allow(@player1).to receive(:make_move).with(initial_board).and_return(board_after_player1_move)
+
+        allow(@player1).to receive(:marker).and_return(@p1_marker).exactly(2).times
+
+        allow(@player2).to receive(:marker).and_return(@p2_marker).exactly(2).times
+
+        board_after_player2_move = Board.new(
+          [ 
+            "X", "O", "X",
+            "3", "O", "X", 
+            "X", "O", "8"
+          ])
+
+        allow(@player2).to receive(:make_move).with(board_after_player1_move).and_return(board_after_player2_move)
+
+        result = @game.players_turns(initial_board)
+
+        expect(result).to eq(board_after_player2_move.cells)
       end
     end
   end

@@ -24,7 +24,6 @@ module TicTacToe
       end
 
       context "Player 1 chooses 'O'" do 
-        
         before(:each) do 
           expect(mock_console_ui).to receive(:user_input).and_return("O")
         end 

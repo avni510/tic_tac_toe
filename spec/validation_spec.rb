@@ -25,7 +25,7 @@ module TicTacToe
 
     describe ".marker_valid?" do 
       
-      it "can check if a valid symbol was entered" do 
+      it "checks if a valid symbol was entered" do 
         [ 
           ["p", false], 
           ["o", true], 
