@@ -38,5 +38,14 @@ module TicTacToe
       expect(result_cells).to eq(board_after_move.cells)
       end
     end
+
+    it "returns the size of the board" do
+      board = Board.new([
+        "0", "1", "2", 
+        "3", "4", "5", 
+        "6", "7", "8"
+      ])
+      expect(board.board_size).to eq(9)
+    end
   end
 end

@@ -10,5 +10,9 @@ module TicTacToe
       cells[position.to_i] = marker
       self
     end
+
+    def board_size
+      self.cells.count
+    end
   end
 end

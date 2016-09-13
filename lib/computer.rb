@@ -21,12 +21,8 @@ module TicTacToe
     end
 
     def random_move
-      upper_limit = board_size
+      upper_limit = @board.board_size
       Random.rand(upper_limit)
-    end
-
-    def board_size
-      @board.cells.count
     end
   end
 end
