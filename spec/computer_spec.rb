@@ -7,11 +7,16 @@ module TicTacToe
     before(:each) do
       allow(mock_console_ui).to receive(:move_messages)
       allow(mock_console_ui).to receive(:computer_move_message)
-      @computer = Computer.new('X', mock_console_ui)
+      args = 
+        {
+          player_marker: 'X',
+          console_ui: mock_console_ui
+        }
+      @computer = Computer.new(args)
     end
 
     it "returns the player's marker" do
-      expect(@computer.marker).to eq('X')
+      expect(@computer.player_marker).to eq('X')
     end
 
     describe ".make_move" do

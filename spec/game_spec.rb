@@ -6,12 +6,12 @@ module TicTacToe
     before(:all) do
       @p1_marker, @p2_marker = 'X', 'O'
 
-      mock_console_ui = double
-      game_eval = GameEval.new
-      player_setup = PlayerSetup.new
+      @mock_console_ui = double
+      @game_eval = GameEval.new
+      @player_setup = PlayerSetup.new
       @game_type = double
 
-      @game = Game.new(game_eval, player_setup, mock_console_ui, @game_type)
+      @game = Game.new(@game_eval, @player_setup, @mock_console_ui, @game_type)
       @player1, @player2  = double, double
     end
 
@@ -45,9 +45,9 @@ module TicTacToe
 
         allow(@player1).to receive(:make_move).with(initial_board).and_return(board_after_player1_move)
 
-        allow(@player1).to receive(:marker).and_return(@p1_marker).exactly(2).times
+        allow(@player1).to receive(:player_marker).and_return(@p1_marker).exactly(2).times
 
-        allow(@player2).to receive(:marker).and_return(@p2_marker).exactly(2).times
+        allow(@player2).to receive(:player_marker).and_return(@p2_marker).exactly(2).times
 
         board_after_player2_move = Board.new(
           [ 

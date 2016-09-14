@@ -1,11 +1,11 @@
 module TicTacToe
   class Player
-    attr_reader :marker
+    attr_reader :player_marker
 
-    def initialize(marker, console_ui)
-      @marker = marker
-      @console_ui = console_ui
-      @validation = Validation.new
+    def initialize(params)
+      @player_marker = params[:player_marker]
+      @console_ui = params[:console_ui]
+      @validation = params.fetch("validation", Validation.new)
     end
   end
 end

@@ -1,13 +1,22 @@
+require 'pry'
 module TicTacToe
   require 'spec_helper'
 
   describe Human do 
-    let(:mock_console_ui) { double }
 
-    it "returns the player's marker" do
-      human = Human.new('O', mock_console_ui)
-      expect(human.marker).to eq('O')
-    end
+   before(:each) do
+     @mock_console_ui = double
+     @args = 
+       { 
+         console_ui: @mock_console_ui
+       }
+   end
+
+   it "returns the player's marker" do
+     @args = @args.merge(player_marker: 'O')
+     human = Human.new(@args)
+     expect(human.player_marker).to eq('O')
+   end
     
    describe ".make_move" do
       def validate_move(human, move)
@@ -15,8 +24,8 @@ module TicTacToe
       end
 
       before(:each) do 
-        allow(mock_console_ui).to receive(:move_messages)
-        allow(mock_console_ui).to receive(:move_selection_message)
+        allow(@mock_console_ui).to receive(:move_messages)
+        allow(@mock_console_ui).to receive(:move_selection_message)
       end
 
       context "the game is a space away from being won" do
@@ -34,17 +43,19 @@ module TicTacToe
                   "X", "O", "X"
                 ])
 
-              human = Human.new(marker, mock_console_ui) 
+              @args = @args.merge(player_marker: marker)
+
+              human = Human.new(@args)
 
               board_before_player_move_array = board_before_player_move.cells
 
-              allow(mock_console_ui).to receive(:move_messages).with(board_before_player_move_array, marker)
+              allow(@mock_console_ui).to receive(:move_messages).with(board_before_player_move_array, marker)
 
-              allow(mock_console_ui).to receive(:user_input).and_return(move)
+              allow(@mock_console_ui).to receive(:user_input).and_return(move)
 
               validate_move(human, move)
 
-              board_before_player_move.fill(move, human.marker)
+              board_before_player_move.fill(move, human.player_marker)
 
               board_after_player_move = Board.new(
                 [
@@ -74,14 +85,16 @@ module TicTacToe
             "X", "O", "O", 
             "O", "X", "X"
           ])
+
+          @args = @args.merge(player_marker: marker)
           
-          human = Human.new(marker, mock_console_ui)
+          human = Human.new(@args)
         
-          allow(mock_console_ui).to receive(:user_input).and_return(move) 
+          allow(@mock_console_ui).to receive(:user_input).and_return(move) 
           
           validate_move(human, move)
          
-          board_before_player_move.fill(move, human.marker)
+          board_before_player_move.fill(move, human.player_marker)
           
           board_after_player_move = Board.new(
             [
@@ -112,9 +125,11 @@ module TicTacToe
                 "6", "X", "X"
               ])
 
-              human = Human.new(marker, mock_console_ui)
+              @args = @args.merge(player_marker: marker)
 
-              allow(mock_console_ui).to receive(:user_input).and_return(move)
+              human = Human.new(@args)
+
+              allow(@mock_console_ui).to receive(:user_input).and_return(move)
 
               validate_move(human, move)
 
@@ -144,12 +159,14 @@ module TicTacToe
               "O", "O", "5",
               "6", "X", "X"
             ])
+            
+            @args = @args.merge(player_marker: marker)
 
-            expect(mock_console_ui).to receive(:user_input).and_return(first_move, second_move)
+            expect(@mock_console_ui).to receive(:user_input).and_return(first_move, second_move)
 
-            expect(mock_console_ui).to receive(:valid_move_message).exactly(1).times
+            expect(@mock_console_ui).to receive(:valid_move_message).exactly(1).times
 
-            human = Human.new(marker, mock_console_ui)
+            human = Human.new(@args)
 
             human.make_move(board)
           end

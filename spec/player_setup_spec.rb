@@ -13,6 +13,7 @@ module TicTacToe
         allow(game_type).to receive(:human_v_human).and_return(true)
 
         player_setup.player_assignment(marker1, marker2, mock_console_ui, game_type)
+
         expect(player_setup.p1).to be_a_kind_of(Human)
         expect(player_setup.p2).to be_a_kind_of(Human)
       end
@@ -27,6 +28,7 @@ module TicTacToe
         allow(game_type).to receive(:human_v_simp_comp).and_return(true)
 
         player_setup.player_assignment(marker1, marker2, mock_console_ui, game_type)
+
         expect(player_setup.p1).to be_a_kind_of(Human)
         expect(player_setup.p2).to be_a_kind_of(Computer)
       end
