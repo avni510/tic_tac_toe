@@ -6,6 +6,7 @@ module TicTacToe
       @player_marker = params[:player_marker]
       @console_ui = params[:console_ui]
       @validation = params.fetch("validation", Validation.new)
+      @ai = params[:ai]
     end
   end
 end

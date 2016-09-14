@@ -10,7 +10,6 @@ module TicTacToe
         { 
           player_marker: 'X',
           console_ui: mock_console_ui,
-          validation: Validation.new
         }
 
       player = Player.new(params)

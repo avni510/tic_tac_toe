@@ -17,16 +17,18 @@ module TicTacToe
    private 
 
     def human_player(player_marker)
-      params = generate_params_hash(player_marker)
-      Human.new(params)
+      human_params = generate_basic_params(player_marker)
+      Human.new(human_params)
     end
     
     def computer_player(player_marker)
-      params = generate_params_hash(player_marker)
-      Computer.new(params)
+      computer_move_strategy = SimpleComputer.new({})
+      computer_params = generate_basic_params(player_marker)
+      computer_params = computer_params.merge(ai: computer_move_strategy)
+      Computer.new(computer_params)
     end
 
-    def generate_params_hash(player_marker)
+    def generate_basic_params(player_marker)
       {
         console_ui: @console_ui, 
         player_marker: player_marker, 

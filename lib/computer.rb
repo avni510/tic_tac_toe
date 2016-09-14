@@ -13,15 +13,10 @@ module TicTacToe
 
     def valid_move_loop
       begin 
-        move = random_move
+        move = @ai.generate_move(@board)
         move = move.to_s
       end until @validation.move_valid?(@board.cells, move)  
       move
-    end
-
-    def random_move
-      upper_limit = @board.size
-      Random.rand(upper_limit)
     end
   end
 end

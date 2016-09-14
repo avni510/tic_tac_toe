@@ -12,6 +12,7 @@ require_relative "game_type"
 require_relative "computer"
 require_relative "human"
 require_relative "player_setup"
+require_relative "simple_computer"
 
 module TicTacToe
 end
