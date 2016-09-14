@@ -4,16 +4,19 @@ module TicTacToe
     it "" do
       mock_console_ui = double
 
+      allow(mock_console_ui).to receive(:move_messages)
+      allow(mock_console_ui).to receive(:computer_move_message)
+
+
       hardcomputer = HardComputer.new("X", mock_console_ui)
 
       board = Board.new([
-            "0", "1", "2",
-            "3", "4", "5", 
-            "6", "7", "8"
+            "X", "1", "X",
+            "3", "O", "O", 
+            "X", "7", "O"
           ])
 
-      hardcomputer.minmax(board)
+      hardcomputer.make_move(board)
     end
-
   end
 end
