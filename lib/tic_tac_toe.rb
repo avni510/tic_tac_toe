@@ -13,6 +13,7 @@ require_relative "computer"
 require_relative "human"
 require_relative "player_setup"
 require_relative "simple_computer"
+require_relative "hard_computer"
 
 module TicTacToe
 end

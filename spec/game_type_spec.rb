@@ -22,6 +22,12 @@ module TicTacToe
       expect(game_type.human_v_simp_comp).to eq(true)
     end
 
+    it "sets @human_v_hard_comp to true if 3 is entered" do
+      expect(mock_console_ui).to receive(:user_input).and_return('3')
+      game_type.game_menu
+      expect(game_type.human_v_hard_comp).to eq(true)
+    end
+
     it "displays instructions to the user of how to select a game" do
       expect(mock_console_ui).to receive(:game_menu_messages)
       game_type.game_menu
@@ -30,7 +36,8 @@ module TicTacToe
     it "prints the game menu choices" do
       menu_choices = {
         "1" => "1. Human v. Human", 
-        "2" => "2. Human v. Simple Computer"
+        "2" => "2. Human v. Simple Computer", 
+        "3" => "3. Human v. Hard Computer"
       }
       expect(mock_console_ui).to receive(:display_game_menu).with(menu_choices)
       game_type.game_menu
