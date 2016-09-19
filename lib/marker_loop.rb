@@ -1,5 +1,4 @@
 module TicTacToe
-
   class MarkerLoop
 
     def initialize(validation, console_ui)

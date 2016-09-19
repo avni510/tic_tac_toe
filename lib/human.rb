@@ -3,11 +3,11 @@ module TicTacToe
 
     def make_move(board)
       @board = board
-      @console_ui.move_messages(@board.cells, @marker)
+      @console_ui.move_messages(@board.cells, @player_marker)
       @console_ui.move_selection_message
       move = @console_ui.user_input
       move = valid_move_loop(move)
-      @board.fill(move, @marker)
+      @board.fill(move, @player_marker)
     end
     
     private

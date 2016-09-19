@@ -2,6 +2,7 @@ module TicTacToe
   class GameType
     attr_reader :human_v_human
     attr_reader :human_v_simp_comp
+    attr_reader :human_v_hard_comp
 
     def initialize(console_ui)
       @console_ui = console_ui
@@ -20,7 +21,8 @@ module TicTacToe
     def game_options
       { 
         '1' => '1. Human v. Human', 
-        '2' => '2. Human v. Simple Computer'
+        '2' => '2. Human v. Simple Computer', 
+        '3' => '3. Human v. Hard Computer'
       }
     end
 
@@ -38,6 +40,8 @@ module TicTacToe
         @human_v_human = true
       elsif user_game_choice == @menu_choices.key('2. Human v. Simple Computer')
         @human_v_simp_comp = true
+      elsif user_game_choice == @menu_choices.key('3. Human v. Hard Computer')
+        @human_v_hard_comp = true
       end
     end
   end

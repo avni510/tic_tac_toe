@@ -19,33 +19,29 @@ module TicTacToe
 
       position, marker = "2", "X"
 
-      board_prior_to_move = Board.new([
-        "0", "1", "2", 
-        "3", "4", "5", 
-        "6", "7", "8"
-      ])
+      board = Board.new
 
-      board_after_move = Board.new([
-        "0", "1", "#{marker}", 
-        "3", "4", "5", 
-        "6", "7", "8"
-      ])
-    
-      result_board = board.fill(position, marker)
+      board.fill(position, marker)
 
-      result_cells = result_board.cells
-      
-      expect(result_cells).to eq(board_after_move.cells)
+      expect(board.cells[2]).to eq("X")
       end
     end
 
     it "returns the size of the board" do
-      board = Board.new([
-        "0", "1", "2", 
+      board = Board.new
+      expect(board.size).to eq(9)
+    end
+
+    it "removes the marker from the board given a space" do
+      initial_board = Board.new([
+        "0", "1", "X", 
         "3", "4", "5", 
         "6", "7", "8"
       ])
-      expect(board.size).to eq(9)
+      
+      initial_board.refill("2")
+
+      expect(initial_board.cells[2]).to eq("2")
     end
   end
 end

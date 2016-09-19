@@ -7,28 +7,21 @@ module TicTacToe
     before(:each) do
       allow(mock_console_ui).to receive(:move_messages)
       allow(mock_console_ui).to receive(:computer_move_message)
-      @computer = Computer.new('X', mock_console_ui)
+      computer_move_strategy = SimpleComputer.new({})
+      args = 
+        {
+          player_marker: 'X',
+          console_ui: mock_console_ui,
+          ai: computer_move_strategy
+        }
+      @computer = Computer.new(args)
     end
 
     it "returns the player's marker" do
-      expect(@computer.marker).to eq('X')
+      expect(@computer.player_marker).to eq('X')
     end
 
     describe ".make_move" do
-      context "the computer selects a move that is open" do
-        it "randomly selects a move and returns a board object" do
-          initial_board = Board.new([ 
-            "0", "1", "2",
-            "3", "4", "5", 
-            "6", "7", "8"
-          ])
-          
-          result = @computer.make_move(initial_board)
-
-          expect(result).to be_a_kind_of(Board)
-        end
-      end
-
       context "the computer selects a move that is not open" do
         it "selects another move" do
           initial_board = Board.new(

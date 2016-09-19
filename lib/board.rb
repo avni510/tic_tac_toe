@@ -14,5 +14,10 @@ module TicTacToe
     def size
       self.cells.count
     end
+
+    def refill(position)
+      cells[position.to_i] = position
+      self
+    end
   end
 end
