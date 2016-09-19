@@ -12,7 +12,6 @@ module TicTacToe
     
     def assign_players(marker1, marker2)
       @player_setup.player_assignment(marker1, marker2, @console_ui, @game_type)
-
       @player1 = @player_setup.p1
       @player2 = @player_setup.p2
     end

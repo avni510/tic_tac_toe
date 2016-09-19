@@ -1,8 +1,6 @@
 module TicTacToe
   class Player
     attr_reader :player_marker
-    attr_reader :opponent_marker
-    attr_reader :game_eval
 
     def initialize(params)
       @player_marker = params[:player_marker]
